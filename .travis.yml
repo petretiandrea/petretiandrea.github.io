@@ -4,11 +4,17 @@ node_js:
 after_success:
 - npm run build
 deploy:
-  provider: heroku
-  email: andreapedro96@gmail.com
-  app: website-andrea
-  on:
-    branch: master
-    repo: petretiandrea/personal-website
-  api_key:
-    secure: KhiZ8FvBLu/TrWoKt/+KJWcOBwLTC2UYkQ6Fis+jeOnv74MqHIlOI0KJFhyICuemwnXxKz3L/5K3XFUvtvpdKfSu+dEeg1DVf/VjbACmU2FlwneWSLDHZ+uaXSJMmkoKdDvMlv8xhXqfCjYqzcTRYu3bSdCdM0WcBUAY8zvL7d0jjx27ua3qiGLvfYagqp2rH8h23VtBG2Sh2gFgZVybZmcz275xHfFdaeQ7FWMPqqx72P9Ed8LJevdKtAS3OQj62yHx/R4fYzl919viYvX9Gieel+1lAxSEOxshiZAFix4J8reJO12H9YWRF0f4izy/IJw+rI5E9AfCB85r3l942amIw55xoKEjXDd1g31/HxOYyEutc4qiRNEZHGfwBeNbLLLErLeH0fD5vzLSHEU2J0K27BiX2H5AaFKErpWNUQEWSIvkNW0p2WnVprAm3IV5pF3IFGCSx/UBMKwG9Jpnb9BMkkSg/7Ozw+1vAQ/+ocUKWHYTpz1UV0NEPFJuj4iNPfheOlvXkiNpURLrHZhYpYH3MH9k2IXyJ1HfVvTL11Z8g0LHipprStV+xBinMNP4IDa3o6QS57/K5ZA1NBls2CO5WOS7qTPRPJn2CafH3nAY0i+RCtxQPWMZZmo4K8hqp4T2l2IRPRBsjElIAEvgz0Ydkky7z0OrEutUccJ7Upk=
+  - provider: heroku
+    email: andreapedro96@gmail.com
+    app: website-andrea
+    on:
+      branch: master
+      repo: petretiandrea/personal-website
+    api_key:
+      secure: KhiZ8FvBLu/TrWoKt/+KJWcOBwLTC2UYkQ6Fis+jeOnv74MqHIlOI0KJFhyICuemwnXxKz3L/5K3XFUvtvpdKfSu+dEeg1DVf/VjbACmU2FlwneWSLDHZ+uaXSJMmkoKdDvMlv8xhXqfCjYqzcTRYu3bSdCdM0WcBUAY8zvL7d0jjx27ua3qiGLvfYagqp2rH8h23VtBG2Sh2gFgZVybZmcz275xHfFdaeQ7FWMPqqx72P9Ed8LJevdKtAS3OQj62yHx/R4fYzl919viYvX9Gieel+1lAxSEOxshiZAFix4J8reJO12H9YWRF0f4izy/IJw+rI5E9AfCB85r3l942amIw55xoKEjXDd1g31/HxOYyEutc4qiRNEZHGfwBeNbLLLErLeH0fD5vzLSHEU2J0K27BiX2H5AaFKErpWNUQEWSIvkNW0p2WnVprAm3IV5pF3IFGCSx/UBMKwG9Jpnb9BMkkSg/7Ozw+1vAQ/+ocUKWHYTpz1UV0NEPFJuj4iNPfheOlvXkiNpURLrHZhYpYH3MH9k2IXyJ1HfVvTL11Z8g0LHipprStV+xBinMNP4IDa3o6QS57/K5ZA1NBls2CO5WOS7qTPRPJn2CafH3nAY0i+RCtxQPWMZZmo4K8hqp4T2l2IRPRBsjElIAEvgz0Ydkky7z0OrEutUccJ7Upk=
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: dist
+    on:
+      branch: master
