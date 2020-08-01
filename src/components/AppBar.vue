@@ -1,6 +1,6 @@
 <template>
-  <v-app-bar fixed elevate-on-scroll v-scroll:#scroll-target="onScroll" color="transparent" dark height="120px">
-    <v-layout justify-center>
+  <v-app-bar fixed elevate-on-scroll ref="appbar" :color="appBarColor" dark height="120px">
+    <v-layout justify-center >
       <v-container>
         <v-layout>
           <div :class="{'display-1 font-weight-bold': $vuetify.breakpoint.smAndUp,'title font-weight-bold': $vuetify.breakpoint.smAndDown, }">
@@ -10,7 +10,7 @@
           <v-toolbar-items class="text-right">
             <v-btn
               :x-small="$vuetify.breakpoint.smAndDown"
-              @click="$vuetify.goTo('#about',options )"
+              @click="$vuetify.goTo('#section-about-me',options )"
               text
             >About Me</v-btn>
             <v-btn
@@ -32,10 +32,18 @@
 
 <script>
 export default {
-  methods: {
-    onScroll: (e) => {
-      console.log(e)
+  data: () => ({
+    appBarScrolled: false
+  }),
+  computed: {
+    appBarColor: function() {
+      return this.appBarScrolled ? 'grey' : 'transparent';
     }
+  },
+  mounted: function() {
+    this.$watch("$refs.appbar.hideShadow", newValue => {
+      this.appBarScrolled = !newValue
+    });
   }
 }
 </script>
