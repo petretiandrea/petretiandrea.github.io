@@ -1,6 +1,6 @@
 # personal-website
 
-[![Build Status](https://travis-ci.com/petretiandrea/personal-website.svg?token=szy9hmXLp8PXysS8Syvh&branch=master)](https://travis-ci.com/petretiandrea/personal-website)
+[![Build Status](https://travis-ci.com/petretiandrea/petretiandrea.github.io.svg?token=szy9hmXLp8PXysS8Syvh&branch=master)](https://travis-ci.com/petretiandrea/petretiandrea.github.io)
 
 ## Project setup
 ```
