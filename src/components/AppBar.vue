@@ -1,10 +1,10 @@
 <template>
-  <v-app-bar fixed elevate-on-scroll ref="appbar" :color="appBarColor" dark height="120px">
+  <v-app-bar fixed elevate-on-scroll ref="appbar" :color="appBarColor" dark>
     <v-layout justify-center >
       <v-container>
         <v-layout>
-          <div :class="{'display-1 font-weight-bold': $vuetify.breakpoint.smAndUp,'title font-weight-bold': $vuetify.breakpoint.smAndDown, }">
-            Andrea Petreti
+          <div>
+            <v-btn text>Andrea Petreti</v-btn>
           </div>
           <v-spacer></v-spacer>
           <v-toolbar-items class="text-right">

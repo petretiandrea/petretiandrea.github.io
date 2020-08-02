@@ -1,0 +1,7 @@
+[
+    {
+        "title": "Subspedia",
+        "description": "Application developed for <a target=\"_blank\" href=\"https://www.subspedia.tv/\"> subspedia.tv</a>. It allows the management of their favorite TV series and the download of subtitles produced by the Subpsedia community.",
+        "thumbnail": "@/assets/subpsedia/screen.png"
+    }
+]
