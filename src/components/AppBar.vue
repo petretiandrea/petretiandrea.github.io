@@ -1,6 +1,6 @@
 <template>
   <v-app-bar fixed elevate-on-scroll ref="appbar" :color="appBarColor" dark>
-    <v-layout justify-center >
+    <v-layout justify-center>
       <v-container>
         <v-layout>
           <div>

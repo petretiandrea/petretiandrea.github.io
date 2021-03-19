@@ -25,16 +25,19 @@
         <section class="section-project">
             <v-container>
                 <v-row>
-                    <v-col class="text-h4">Recent Works</v-col>
+                    <v-col class="text-h4">Progetti Recenti</v-col>
                 </v-row>
                 <v-row>
                     <template v-for="(project, index) in projects">
                         <v-col md6 xs12 class="mx-auto" :key="index"> <!-- col-md-6  col-12-xsmall project mx-auto -->
-                            <project :title="project.title" :thumbnail="project.thumbnail">
-                                <template #description>{{ project.description }}</template>
+                            <project :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
+                                <template #description><div v-html=project.description /></template>
                             </project>
-                        </v-col> 
+                        </v-col>
                     </template>
+                </v-row>
+                <v-row>
+                    <v-col class="mx-auto"><v-btn>Altri Progetti</v-btn></v-col>
                 </v-row>
             </v-container>
         </section>
