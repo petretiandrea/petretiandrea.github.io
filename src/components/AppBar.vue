@@ -1,43 +1,52 @@
 <template>
   <v-app-bar fixed elevate-on-scroll ref="appbar" :color="appBarColor" dark>
-    <v-layout justify-center >
       <v-container>
         <v-layout>
-          <div>
-            <v-btn text>Andrea Petreti</v-btn>
-          </div>
+          <v-btn text>Andrea Petreti</v-btn>
           <v-spacer></v-spacer>
-          <v-toolbar-items class="text-right">
-            <v-btn
-              :x-small="$vuetify.breakpoint.smAndDown"
-              @click="$vuetify.goTo('#section-about-me',options )"
-              text
-            >About Me</v-btn>
-            <v-btn
-              :x-small="$vuetify.breakpoint.smAndDown"
-              @click="$vuetify.goTo('#portfolio',options )"
-              text
-            >My Work</v-btn>
-            <v-btn
-              :x-small="$vuetify.breakpoint.smAndDown"
-              @click="$vuetify.goTo('#contact',options )"
-              text
-            >Contact</v-btn>
+
+          <v-toolbar-items class="text-right hidden-sm-and-down">
+            <template v-for="item in menu">
+              <v-btn :key="item.goto_id"
+                :x-small="$vuetify.breakpoint.smAndDown"
+                @click="$vuetify.goTo(item.goto_id, options)" 
+                text> {{ item.section_name }}</v-btn>
+            </template>
           </v-toolbar-items>
+
+          <v-menu v-if="isMobile" class="hidden-md-and-up">
+            <template v-slot:activator="{ on }">
+              <v-btn icon v-on="on">
+                <v-icon color="white">mdi-menu</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item v-for="item in menu" :key="item.goto_id">
+                  <v-list-item-title >{{ item.section_name }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-layout>
       </v-container>
-    </v-layout>
   </v-app-bar>
 </template>
 
 <script>
 export default {
   data: () => ({
-    appBarScrolled: false
+    appBarScrolled: false,
+    menu: [
+      { section_name: "About Me", goto_id: "#section-about-me"},
+      { section_name: "My Work", goto_id: "#recent-works"},
+      { section_name: "Contact", goto_id: "#contact"}
+    ]
   }),
   computed: {
     appBarColor: function() {
       return this.appBarScrolled ? 'grey' : 'transparent';
+    },
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
     }
   },
   mounted: function() {

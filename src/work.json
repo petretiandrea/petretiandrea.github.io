@@ -2,6 +2,19 @@
     {
         "title": "Subspedia",
         "description": "Application developed for <a target=\"_blank\" href=\"https://www.subspedia.tv/\"> subspedia.tv</a>. It allows the management of their favorite TV series and the download of subtitles produced by the Subpsedia community.",
-        "thumbnail": "@/assets/subpsedia/screen.png"
+        "thumbnail": "logo.png",
+        "image_gallery": ["logo.png"]
+    },
+    {
+        "title": "Fluvium",
+        "description": "Aaaaaaaaa",
+        "thumbnail": "fluvium/thubnail.png",
+        "image_gallery": ["fluvium/screen1.png", "fluvium/screen2.png", "fluvium/screen3.png"]
+    },
+    {
+        "title": "Scanbage",
+        "description": "aaa",
+        "thumbnail": "scanbage/scanbage-pic1.png",
+        "image_gallery": ["scanbage/scanbage-pic1.png", "scanbage/scanbage-pic2.png", "scanbage/scanbage-pic3.png", "scanbage/scanbage-pic4.png", "scanbage/scanbage-pic5.png"]
     }
 ]
