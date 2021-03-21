@@ -2,26 +2,28 @@
   <v-app-bar fixed elevate-on-scroll ref="appbar" :color="appBarColor" dark>
       <v-container>
         <v-layout>
-          <div>
-            <v-btn text>Andrea Petreti</v-btn>
-          </div>
+          <v-btn text>Andrea Petreti</v-btn>
           <v-spacer></v-spacer>
 
           <v-toolbar-items class="text-right hidden-sm-and-down">
             <template v-for="item in menu">
               <v-btn :key="item.goto_id"
                 :x-small="$vuetify.breakpoint.smAndDown"
-                @click="$vuetify.goTo(item.goto_id,options)" 
+                @click="$vuetify.goTo(item.goto_id, options)" 
                 text> {{ item.section_name }}</v-btn>
             </template>
           </v-toolbar-items>
 
-          <v-menu class="hidden-md-and-up">
-            <v-toolbar-side-icon slot="activator"></v-toolbar-side-icon>
+          <v-menu v-if="isMobile" class="hidden-md-and-up">
+            <template v-slot:activator="{ on }">
+              <v-btn icon v-on="on">
+                <v-icon color="white">mdi-menu</v-icon>
+              </v-btn>
+            </template>
             <v-list>
-              <v-list-tile v-for="item in menu" :key="item.goto_id">
-                <v-list-tile-content><v-list-tile-title>{{ item.section_name }}</v-list-tile-title></v-list-tile-content>
-              </v-list-tile>
+              <v-list-item v-for="item in menu" :key="item.goto_id">
+                  <v-list-item-title >{{ item.section_name }}</v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
         </v-layout>
@@ -35,13 +37,16 @@ export default {
     appBarScrolled: false,
     menu: [
       { section_name: "About Me", goto_id: "#section-about-me"},
-      { section_name: "My Work", goto_id: "#portfolio"},
+      { section_name: "My Work", goto_id: "#recent-works"},
       { section_name: "Contact", goto_id: "#contact"}
     ]
   }),
   computed: {
     appBarColor: function() {
       return this.appBarScrolled ? 'grey' : 'transparent';
+    },
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
     }
   },
   mounted: function() {

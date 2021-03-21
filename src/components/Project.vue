@@ -1,22 +1,23 @@
 <template>
-    <v-card @click.stop="gallery=true">
-        <v-img :src="getImage(thumbnail)" max-width="250" max-height="100">
+    <v-card @click="gallery=true" max-width="600">
+        <v-img :src="getImage(thumbnail)" max-height="150">
         </v-img>
         <v-card-title>{{title}}</v-card-title>
         <v-card-text>
             <slot name="description"></slot>
         </v-card-text>
-
-        <v-dialog v-model="gallery" max-width="300">
-            <template>
-                <v-carousel cycle hide-delimiters show-arrows-on-hover>
-                    <template v-for="(image, i) in image_gallery">
-                        <v-carousel-item :key="i">
-                            <v-img :src="getImage(image)" contain></v-img>
-                        </v-carousel-item>
-                    </template>
-                </v-carousel>
-            </template>
+        <v-dialog v-model="gallery">
+            <v-card>
+                <template>
+                    <v-carousel cycle hide-delimiters show-arrows-on-hover height="auto">
+                        <template v-for="(image, i) in image_gallery">
+                            <v-carousel-item :key="i">
+                                <v-img :src="getImage(image)"></v-img>
+                            </v-carousel-item>
+                        </template>
+                    </v-carousel>
+                </template>
+            </v-card>
         </v-dialog>
     </v-card>
 </template>

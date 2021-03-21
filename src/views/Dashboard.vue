@@ -22,22 +22,22 @@
             </v-container>
         </section>
 
-        <section class="section-project">
+        <section class="section-project" id="recent-works">
             <v-container>
                 <v-row>
                     <v-col class="text-h4">Progetti Recenti</v-col>
                 </v-row>
                 <v-row>
                     <template v-for="(project, index) in projects">
-                        <v-col md6 xs12 class="mx-auto" :key="index"> <!-- col-md-6  col-12-xsmall project mx-auto -->
-                            <project :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
+                        <v-col md6 xs12 class="mx-auto d-flex" :key="index"  style="flex-direction:column"> <!-- col-md-6  col-12-xsmall project mx-auto -->
+                            <project class="flex-grow-1" :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
                                 <template #description><div v-html=project.description /></template>
                             </project>
                         </v-col>
                     </template>
                 </v-row>
                 <v-row>
-                    <v-col class="mx-auto"><v-btn>Altri Progetti</v-btn></v-col>
+                    <v-col class="mx-auto"><v-btn text outlined>Altri Progetti</v-btn></v-col>
                 </v-row>
             </v-container>
         </section>
