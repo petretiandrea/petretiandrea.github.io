@@ -5,60 +5,57 @@
             dark
             src="https://images.unsplash.com/photo-1554034483-04fda0d3507b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=1080">
             <v-row fill-height align="center" justify="center">
-                <v-col class="text-center" cols="12">
-                    Hi Im Andrea Petreti!
-                </v-col>
+                <v-content class="text-center">
+                    <v-row align="center" justify="center">   
+                        <v-col class="text-right">
+                            <v-avatar size="100">
+                                <img :src="require('@/assets/my-avatar.png')" alt="Andrea Petreti"/>
+                            </v-avatar>
+                        </v-col>
+                        <v-col class="text-left">
+                            Ciao, sono Andrea Petreti!
+                        </v-col>
+                        <v-col cols="12">
+                            <v-btn text icon href="https://github.com/petretiandrea" target="_blank"><v-icon >mdi-github</v-icon></v-btn>
+                            <v-btn text icon href="https://www.linkedin.com/in/andrea-petreti/" target="_blank"><v-icon>mdi-linkedin</v-icon></v-btn>
+                            <v-btn text icon href="mailto:petretiandrea@gmail.com" target="_blank"><v-icon>mdi-email</v-icon></v-btn>
+                            <v-btn text icon href="https://profile.codersrank.io/user/petretiandrea" target="_blank">
+                                <icon data="@/assets/icons/coders-rank.svg" width="24" color="#0000008a"/>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-content>
             </v-row>
         </v-parallax>
     
-        <section class="section-about-me" id="section-about-me">
-            <v-container>
-                <v-row><v-col class="text-h4" >About Me</v-col></v-row>
-                <v-row>
-                    <v-col class="mx-auto">
-                        I am a student in Engineering and Computer Science at the University of Bologna. I graduated in Applied Informatics (2018) at the University of Urbino with 108/110. In my free time I deal with the development of mobile devices and I am passionate about the world of IoT.
-                    </v-col>
-                </v-row>
-            </v-container>
+        <section class="section-about-me dark-grey" id="section-about-me">
+            <about-me />
         </section>
 
-        <section class="section-project">
-            <v-container>
-                <v-row>
-                    <v-col class="text-h4">Progetti Recenti</v-col>
-                </v-row>
-                <v-row>
-                    <template v-for="(project, index) in projects">
-                        <v-col md6 xs12 class="mx-auto" :key="index"> <!-- col-md-6  col-12-xsmall project mx-auto -->
-                            <project :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
-                                <template #description><div v-html=project.description /></template>
-                            </project>
-                        </v-col>
-                    </template>
-                </v-row>
-                <v-row>
-                    <v-col class="mx-auto"><v-btn>Altri Progetti</v-btn></v-col>
-                </v-row>
-            </v-container>
+        <section class="section-project" id="recent-works">
+            <work-section/>
         </section>
     </div>
 </template>
 
+
+
 <script>
-import Project from '@/components/Project'
-import works from '@/work.json'
+import workSection from '@/views/sections/RecentWork'
+import aboutMe from '@/views/sections/AboutMe'
 
 export default {
     components: {
-        'project': Project
-    },
-    data: () => ({
-        projects: works
-    })
+        'work-section': workSection,
+        'about-me': aboutMe
+    }
 }
 </script>
 
 <style scoped>
+.dark-grey {
+    background-color: #212529 !important;
+}
 .fill-viewport {
     height: 100vh;
 }
