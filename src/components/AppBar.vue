@@ -36,14 +36,14 @@ export default {
   data: () => ({
     appBarScrolled: false,
     menu: [
-      { section_name: "About Me", goto_id: "#section-about-me"},
-      { section_name: "My Work", goto_id: "#recent-works"},
-      { section_name: "Contact", goto_id: "#contact"}
+      { section_name: "Su di me", goto_id: "#section-about-me"},
+      { section_name: "Progetti", goto_id: "#recent-works"},
+      { section_name: "Contatti", goto_id: "#contact"}
     ]
   }),
   computed: {
     appBarColor: function() {
-      return this.appBarScrolled ? 'grey' : 'transparent';
+      return this.appBarScrolled ? '#212529' : 'transparent';
     },
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
