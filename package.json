@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.5.12",
     "@vue/cli-service": "~4.4.0",
     "@yzfe/svgicon-loader": "^1.0.4",
     "@yzfe/vue-cli-plugin-svgicon": "~1.0.3",
