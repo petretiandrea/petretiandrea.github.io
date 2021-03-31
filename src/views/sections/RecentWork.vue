@@ -1,12 +1,12 @@
 <template>
-    <v-container>
+    <v-container class="py-16 px-4">
         <v-row>
             <v-col class="text-h4">Progetti Recenti</v-col>
         </v-row>
-        <v-row>
-            <template v-for="(project, index) in projects">
-                <v-col md6 xs12 class="mx-auto d-flex" :key="index"  style="flex-direction:column"> <!-- col-md-6  col-12-xsmall project mx-auto -->
-                    <project class="flex-grow-1" :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
+        <v-row v-masonry="`project-gallery`" item-selector=".item" class="masonry-container" transition-duration="0.3s">
+            <template  v-for="(project, index) in projects">
+                <v-col md="4" sm="6" v-masonry-tile class="item" :key="index">
+                    <project @ready="$redrawVueMasonry('project-gallery')" :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
                         <template #description><div v-html=project.description /></template>
                     </project>
                 </v-col>
@@ -17,7 +17,7 @@
 
 <script>
 import Project from '@/components/Project'
-import works from '@/work.json'
+import works from '@/data/work.json'
 
 export default {
     components: {

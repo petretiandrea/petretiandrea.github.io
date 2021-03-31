@@ -6,12 +6,14 @@ import CodersrankSummary from '@codersrank/summary';
 import VueCustomElement from 'vue-custom-element';
 import '@yzfe/svgicon/lib/svgicon.css'
 import { VueSvgIcon } from '@yzfe/vue-svgicon'
+import { VueMasonryPlugin } from "vue-masonry";
 
 Vue.config.ignoredElements = [
   'codersrank-summary'
 ];
 
 Vue.use(VueCustomElement)
+Vue.use(VueMasonryPlugin)
 
 // register web component as <codersrank-summary> element
 Vue.customElement('codersrank-summary', CodersrankSummary)

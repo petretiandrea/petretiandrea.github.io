@@ -36,6 +36,7 @@ export default {
     }),
     methods: {
         timelineTextAlign: function(index) {
+            if (this.$vuetify.breakpoint.smAndDown) return "text-left";
             return (index % 2 == 0) ? "text-left" : "text-right";
         }
     },
