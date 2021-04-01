@@ -35,6 +35,21 @@
         <section class="section-project" id="recent-works">
             <work-section/>
         </section>
+
+        <v-footer class="dark-grey" padless>
+            <v-card flat tile class="dark-grey lighten-1 white--text text-center" width="100%">
+                <v-card-text>
+                    <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
+                        <v-icon size="24px">{{icon}}</v-icon>
+                    </v-btn>
+                    <!-- TODO: add vertical divider <v-divider :key="icon" vertical color="white"/> -->
+                </v-card-text>
+                <v-divider dark class="inset-both"></v-divider>
+                <v-card-text class="white--text">
+                    {{ new Date().getFullYear() }} — <strong>Andrea Petreti</strong>
+                </v-card-text>
+            </v-card>
+        </v-footer>
     </div>
 </template>
 
@@ -45,6 +60,9 @@ import workSection from '@/views/sections/RecentWork'
 import aboutMe from '@/views/sections/AboutMe'
 
 export default {
+    data: () => ({
+        icons: ['mdi-facebook', 'mdi-linkedin', 'mdi-instagram']
+    }),
     components: {
         'work-section': workSection,
         'about-me': aboutMe
@@ -53,6 +71,10 @@ export default {
 </script>
 
 <style scoped>
+.inset-both {
+    margin-left: 72px;
+    margin-right: 72px;
+}
 .dark-grey {
     background-color: #212529 !important;
 }

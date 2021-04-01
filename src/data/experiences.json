@@ -2,20 +2,23 @@
     {
         "from": "01/06/2015",
         "title": "Diploma",
-        "description": "Diploca in Informatica presso ITIS E.Mattei Urbino.",
-        "color": "orange"
+        "description": "Diploma in Informatica presso ITIS E.Mattei Urbino.",
+        "color": "orange",
+        "icon": "mdi-school"
     },
     {
         "from": "10/01/2018",
         "title": "Laura triennale",
-        "description": "Laurea in Informatia applicata presso Università degli Studi di Urbino Carlo Bo.",
-        "color": "orange"
+        "description": "Laurea in Informatica applicata presso Università degli Studi di Urbino Carlo Bo.",
+        "color": "orange",
+        "icon": "mdi-school"
     },
     {
-        "from": "10/01/2021",
+        "from": "03/01/2021",
         "title": "Laura magistrale",
-        "description": "Laurea magistrale in Ingegneria e Scienze Informatiche presso Università di Bologna. Votazione: 110/110 e lode",
-        "color": "orange"
+        "description": "Laurea magistrale in Ingegneria e Scienze Informatiche presso Università di Bologna. \\\\ 110/110 e lode",
+        "color": "orange",
+        "icon": "mdi-school"
     }
 ]
 

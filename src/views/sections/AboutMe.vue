@@ -8,7 +8,7 @@
             <v-col cols="12" md="6" align="center" justify="center">
                 <v-timeline dark clipped :dense="$vuetify.breakpoint.smAndDown">
                     <template v-for="(experience, index) in experiences">
-                        <v-timeline-item :key="index" small :color="experience.color" dark>
+                        <v-timeline-item :key="index" :color="experience.color" :icon="experience.icon" fill-dot dark>
                             <template v-slot:opposite>
                                 <span :class="`headline font-weight-bold ${experience.color}--text`">
                                     {{ experience.from | format_date | capitalize }}

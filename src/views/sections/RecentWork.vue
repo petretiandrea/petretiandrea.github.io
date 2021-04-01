@@ -3,7 +3,7 @@
         <v-row>
             <v-col class="text-h4">Progetti Recenti</v-col>
         </v-row>
-        <v-row v-masonry="`project-gallery`" item-selector=".item" class="masonry-container" transition-duration="0.3s">
+        <v-row v-masonry="`project-gallery`" item-selector=".item" no-gutters class="mt-3 masonry-container" transition-duration="0.3s">
             <template  v-for="(project, index) in projects">
                 <v-col md="4" sm="6" v-masonry-tile class="item" :key="index">
                     <project @ready="$redrawVueMasonry('project-gallery')" :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
