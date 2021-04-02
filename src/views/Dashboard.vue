@@ -39,8 +39,8 @@
         <v-footer class="dark-grey" padless>
             <v-card flat tile class="dark-grey lighten-1 white--text text-center" width="100%">
                 <v-card-text>
-                    <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
-                        <v-icon size="24px">{{icon}}</v-icon>
+                    <v-btn v-for="icon in icons" :key="icon.icon" class="mx-4 white--text" icon :href="icon.link" target="_blank">
+                        <v-icon size="24px">{{icon.icon}}</v-icon>
                     </v-btn>
                     <!-- TODO: add vertical divider <v-divider :key="icon" vertical color="white"/> -->
                 </v-card-text>
@@ -61,7 +61,20 @@ import aboutMe from '@/views/sections/AboutMe'
 
 export default {
     data: () => ({
-        icons: ['mdi-facebook', 'mdi-linkedin', 'mdi-instagram']
+        icons: [
+            {
+                icon: 'mdi-github',
+                link: 'https://github.com/petretiandrea'
+            },
+            {
+                icon: 'mdi-linkedin',
+                link: 'https://www.linkedin.com/in/andrea-petreti/'
+            },
+            {
+                icon: 'mdi-email',
+                link: 'mailto:petretiandrea@gmail.com'
+            }
+        ]
     }),
     components: {
         'work-section': workSection,

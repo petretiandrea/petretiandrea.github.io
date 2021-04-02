@@ -14,7 +14,7 @@
     {
         "title": "Subspedia",
         "description": "Application developed for <a target=\"_blank\" href=\"https://www.subspedia.tv/\"> subspedia.tv</a>. It allows the management of their favorite TV series and the download of subtitles produced by the Subpsedia community.",
-        "thumbnail": "logo.png",
-        "image_gallery": ["logo.png"]
+        "thumbnail": "subspedia/thubnail.png",
+        "image_gallery": ["subspedia/pic1.png", "subspedia/pic2.png", "subspedia/pic3.png", "subspedia/pic4.png"]
     }
 ]
