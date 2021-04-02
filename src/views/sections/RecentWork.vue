@@ -3,14 +3,14 @@
         <v-row>
             <v-col class="text-h4">Progetti Recenti</v-col>
         </v-row>
-        <v-row v-masonry="`project-gallery`" item-selector=".item" no-gutters class="mt-3 masonry-container" transition-duration="0.3s">
-            <template  v-for="(project, index) in projects">
-                <v-col md="4" sm="6" v-masonry-tile class="item" :key="index">
-                    <project @ready="$redrawVueMasonry('project-gallery')" :title="project.title" :thumbnail="project.thumbnail" :image_gallery="project.image_gallery">
-                        <template #description><div v-html=project.description /></template>
-                    </project>
-                </v-col>
-            </template>
+        <v-row dense class="mt-3">
+            <v-col v-for="(project, index) in projects" :key="index" class="d-flex child-flex" cols="12" xl="3" lg="4" md="6" sm="6">
+                <project :title="project.title" 
+                        :thumbnail="project.thumbnail" 
+                        :image_gallery="project.image_gallery">
+                    <template #description><div v-html=project.description /></template>
+                </project>
+            </v-col>
         </v-row>
     </v-container>
 </template>
