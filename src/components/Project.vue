@@ -15,8 +15,8 @@
                     </v-overlay>
                 </v-fade-transition>
 
-                <v-dialog v-model="gallery" fullscreen hide-overlay>
-                    <v-card>
+                <v-dialog v-model="gallery" overlay-opacity="0.8">
+                    <v-card elevation="0" dark>
                         <v-carousel cycle hide-delimiters width="100%" height="auto" show-arrows-on-hover>
                             <template v-for="(image, i) in image_gallery">
                                 <v-carousel-item :key="i">
@@ -24,6 +24,11 @@
                                 </v-carousel-item>
                             </template>
                         </v-carousel>
+                        <v-card-text class="mt-5 text-center" justify="center">
+                            <v-row>
+                                <v-col cols="12"><slot name="description"></slot></v-col>
+                            </v-row>
+                        </v-card-text>
                     </v-card>
                 </v-dialog>
             </v-card>
