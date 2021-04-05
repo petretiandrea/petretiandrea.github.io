@@ -1,7 +1,7 @@
 [  
     {
         "title": "Scanbage",
-        "description": "aaa",
+        "description": "A powerful web app to recognize the garbage types using photo or bar code. It's like a social where people try to unlock achievements based on garbage collection.",
         "thumbnail": "scanbage/thubnail.png",
         "image_gallery": ["scanbage/scanbage-pic1.png", "scanbage/scanbage-pic2.png", "scanbage/scanbage-pic3.png", "scanbage/scanbage-pic4.png", "scanbage/scanbage-pic5.png"]
     },
