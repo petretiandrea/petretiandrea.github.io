@@ -8,8 +8,8 @@
     "serve-all": "npm run build-dev-hugo & vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-all": "npm run build-github-hugo & vue-cli-service build",
-    "build-dev-hugo": "rm -rf ../public/cv/ & cd hugo-cv & env-cmd -f ../.env.development hugo -D -d ../public/cv/",
-    "build-github-hugo": "rm -rf ../public/cv/ & cd hugo-cv & env-cmd -f ../.env.production hugo -D -d ../public/cv/",
+    "build-dev-hugo": "rm -rf ../public/cv/ & cd hugo-cv & env-cmd -e development hugo -D -d ../public/cv/",
+    "build-github-hugo": "rm -rf ../public/cv/ & cd hugo-cv & env-cmd -e production hugo -D -d ../public/cv/",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
