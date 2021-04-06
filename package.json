@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve-hugo": "cd hugo-cv & hugo server -D",
+    "serve-all": "npm run build-dev-hugo & vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-all": "npm run build-github-hugo & vue-cli-service build",
+    "build-dev-hugo": "rm -rf ../public/cv/ & cd hugo-cv & env-cmd -e development hugo -D -d ../public/cv/",
+    "build-github-hugo": "rm -rf ../public/cv/ & env-cmd -e production --use-shell \"cd hugo-cv && hugo -D -d ../public/cv/\"",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -14,6 +19,8 @@
     "@yzfe/svgicon": "^1.0.1",
     "@yzfe/vue-svgicon": "^4.0.2",
     "core-js": "^3.6.5",
+    "env-cmd": "^10.1.0",
+    "html-loader": "^2.1.2",
     "vue": "^2.6.11",
     "vue-custom-element": "^3.3.0",
     "vue-router": "^3.3.4",

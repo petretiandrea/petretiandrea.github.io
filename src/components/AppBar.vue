@@ -22,7 +22,9 @@
             </template>
             <v-list>
               <v-list-item v-for="item in menu" :key="item.goto_id">
-                  <v-list-item-title >{{ item.section_name }}</v-list-item-title>
+                  <v-list-item-title @click="$vuetify.goTo(item.goto_id, options)">
+                    {{ item.section_name }}
+                  </v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
