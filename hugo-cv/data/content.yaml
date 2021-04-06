@@ -1,22 +1,21 @@
 BasicInfo:
-  FirstName: Inês
-  LastName: Almeida
+  FirstName: Andrea
+  LastName: Petreti
   Photo: img/avatar.jpg
   Contacts:
     - Icon: fas fa-phone
-      Info: +44 123 456 789
+      Info: +39 334 8782198
     - Icon: fas fa-envelope
-      Info: contact@ines-almeida.com
+      Info: petretiandrea@gmail.com
     - Icon: fas fa-globe
-      Info: ines-almeida.com
+      Info: petretiandrea.github.io
     - Icon: fas fa-map-marker-alt
-      Info: Portugal
+      Info: Italia
 
 Profile: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
 Experience:
   - Employer: Super Cool Company
-    Place: Oxford, UK
     Positions:
       - Title: Software Engineer
         Date: Jan 2020 - Present
@@ -59,10 +58,16 @@ Experience:
         Badges: ['Python', 'MATLAB', 'Data Processing', 'Paradigm Design']
 
 Education:
-  - Course: BSc & MSc in Biomedical Engineering and Biophysics
-    Place: University of Lisbon
-    Date: Sep 2012 - Nov 2017
-    Details: Specialised in data analysis
+  - Course: Laurea in Ingegneria e Scienze Informatiche
+    Place: Università di Bologna, sede di Cesena
+    Date: Marzo 2021
+    Details: 110/110 e lode
+  - Course: Laurea in Informatica Applicata
+    Place: Università degli Studi di Urbino Carlo Bo.
+    Date: Ottobre 2018
+  - Course: Diploma in Informatica
+    Place: ITIS E.Mattei Urbino
+    Date: Giugno 2015
 
 Skills:
   - Family: Programming
@@ -94,22 +99,18 @@ Skills:
       - LaTeX
 
 Languages:
-  - Name: Portuguese
-    Level: Native
+  - Name: Italiano
+    Level: Madre Lingua
   - Name: English
-    Level: C2
-  - Name: Spanish
-    Level: B1
-  - Name: German
-    Level: B1
+    Level: B2
 
 Diplomas:
   - ISTQB Tester Certification (2019)
   - English Cambridge CAE (2009)
 
 Interests:
-  - Bouldering
-  - Cooking
+  - Making
+  - Home-Automation
   - Windsurfing
   - Bossa Nova
   - Design
