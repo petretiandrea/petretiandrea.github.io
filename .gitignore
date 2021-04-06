@@ -144,3 +144,7 @@ yarn-error.log
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vue,vuejs,node
 
 src/components/icons
+hugo-cv/public
+
+# where hugo generate its static website code
+public/cv
