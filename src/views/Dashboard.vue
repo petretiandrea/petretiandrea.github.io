@@ -36,7 +36,7 @@
             <work-section/>
         </section>
 
-        <v-footer class="dark-grey" padless>
+        <v-footer class="dark-grey" padless id="contact">
             <v-card flat tile class="dark-grey lighten-1 white--text text-center" width="100%">
                 <v-card-text>
                     <v-btn v-for="icon in icons" :key="icon.icon" class="mx-4 white--text" icon :href="icon.link" target="_blank">

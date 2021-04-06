@@ -9,7 +9,7 @@
             <template v-for="item in menu">
               <v-btn :key="item.goto_id"
                 :x-small="$vuetify.breakpoint.smAndDown"
-                @click="$vuetify.goTo(item.goto_id, options)" 
+                @click="menuItemClick(item)" 
                 text> {{ item.section_name }}</v-btn>
             </template>
           </v-toolbar-items>
@@ -22,7 +22,7 @@
             </template>
             <v-list>
               <v-list-item v-for="item in menu" :key="item.goto_id">
-                  <v-list-item-title @click="$vuetify.goTo(item.goto_id, options)">
+                  <v-list-item-title @click="menuItemClick(item)">
                     {{ item.section_name }}
                   </v-list-item-title>
               </v-list-item>
@@ -40,9 +40,19 @@ export default {
     menu: [
       { section_name: "Su di me", goto_id: "#section-about-me"},
       { section_name: "Progetti", goto_id: "#recent-works"},
-      { section_name: "Contatti", goto_id: "#contact"}
+      { section_name: "Contatti", goto_id: "#contact"},
+      { section_name: "Curriculum", ref: "/cv"}
     ]
   }),
+  methods: {
+    menuItemClick: function(item) {
+      if('goto_id' in item) {
+        this.$vuetify.goTo(item.goto_id, this.options)
+      } else if('ref' in item) {
+        window.location.href = item.ref
+      }
+    }
+  },
   computed: {
     appBarColor: function() {
       return this.appBarScrolled ? '#212529' : 'transparent';
