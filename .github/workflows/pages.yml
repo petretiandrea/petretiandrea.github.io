@@ -17,6 +17,9 @@ jobs:
           npm install
         
       - name: Build hugo cv 🔧
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.80.0'
         run: |
           npm run build-github-hugo
 
