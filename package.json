@@ -21,7 +21,6 @@
     "core-js": "^3.6.5",
     "env-cmd": "^10.1.0",
     "html-loader": "^2.1.2",
-    "node-env-run": "^4.0.2",
     "vue": "^2.6.11",
     "vue-custom-element": "^3.3.0",
     "vue-router": "^3.3.4",
