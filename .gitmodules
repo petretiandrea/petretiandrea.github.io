@@ -1,3 +1,6 @@
 [submodule "hugo-cv/themes/almeida-cv"]
 	path = hugo-cv/themes/almeida-cv
 	url = https://github.com/ineesalmeida/almeida-cv
+[submodule "hugo-cv/themes/hugo-devresume-theme"]
+	path = hugo-cv/themes/hugo-devresume-theme
+	url = https://github.com/cowboysmall-tools/hugo-devresume-theme.git
