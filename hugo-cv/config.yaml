@@ -1,0 +1,158 @@
+baseURL: /
+languageCode: en-us
+defaultContentLanguage: it
+theme: hugo-devresume-theme
+title: Andrea Petreti - CV
+params:
+  author: CowboySmall
+  description: DevResume - Bootstrap 4 Resume/CV Template For Software Developers
+  primaryColor: '#54B689'
+  textPrimaryColor: '#292929'
+  profile:
+    enable: true
+    name: Andrea Petreti
+    tagline: 'TODO: add role e.g. Software Dev or Engineer or other'
+    avatar: avatar.png
+  contact:
+    enable: true
+    location: Italy
+    list:
+      - icon: fas fa-phone-square
+        url: 'tel:#+393348782198'
+        text: +39 334 8782198
+      - icon: fas fa-envelope-square
+        url: 'mailto:#petretiandrea@gmail.com'
+        text: petretiandrea@gmail.com
+      - icon: fas fa-globe
+        url: 'http://petretiandrea.github.io'
+        text: petretiandrea.github.io
+  skills:
+    enable: true
+    list:
+      - title: Technical
+        items:
+          - details: Computer Vision Skills (OpenCV + Machine Learning CNN)
+          - details: Java/Kotlin/Scala
+          - details: C/C++
+          - details: JavaScript/Vue
+          - details: Python
+          - details: Node.js
+          - details: DevOps/Gradle/Continous Integration
+      - title: Professional
+        items:
+          - details: Effective communication
+          - details: Team player
+          - details: Strong problem solver
+          - details: Buona gestione del tempo
+  education:
+    enable: true
+    list:
+      - degree: Laurea in Ingegneria e Scienze Informatiche
+        university: Università di Bologna (Campus Cesena) \\ 110/110 e lode
+        dates: '2021'
+      - degree: Laurea Informatica Applicata
+        university: Università degli Studi di Urbino Carlo Bo
+        dates: '2018'
+      - degree: Diploma in Informatica
+        university: ITIS E. Mattei Urbino
+        dates: '2015'
+  awards:
+    enable: false
+    list:
+      - name: Award Lorem Ipsum
+        body: Microsoft lorem ipsum
+        date: '2019'
+      - name: Award Donec Sodales
+        body: Oracle Aenean
+        date: '2017'
+  languages:
+    enable: true
+    list:
+      - name: Italiano
+        level: Madre lingua
+      - name: English
+        level: B2
+  interests:
+    enable: true
+    list:
+      - name: Home automation
+      - name: Maker
+      - name: Scii
+      - name: Viaggiare
+  summary:
+    enable: true
+    text: >-
+      Summarise your career here. Donec quam felis, ultricies nec, pellentesque
+      eu. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+      commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
+      magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+      ultricies nec, pellentesque eu, pretium quis, sem.  Maecenas nec odio et
+      ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
+      Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis
+      leo. Sed fringilla mauris sit amet nibh.
+  experience:
+    enable: true
+    list:
+      #- title: Corso Android
+      #  dates: 6 mesi 2018 - 2018
+      #  company: Green Dreams (Startup)
+      #  details: >-
+      #    Sviluppatore full stack per dispositivi embedded legati all'industria
+      #    4.0. Tecnologie basate principalmente su C#/Java/C++.
+      - title: Full Stack Developer
+        dates: 6 mesi 2018 - 2018
+        company: Green Dreams (Startup)
+        details: >-
+          Sviluppatore full stack per dispositivi embedded legati all'industria
+          4.0. Tecnologie basate principalmente su C#/Java/C++. Gestione di
+          progetti di piccole dimensioni in collaborazione con
+          [Loccioni](http://loccioni.com)
+  projects:
+    enable: true
+    list:
+      - title: IntelliSerra
+        meta: Open Source | Università
+        tagline: >-
+          Framework per la gestione di serre intelligenti sviluppato in Scala. Il framwork consente di definire serre intelligenti attraverso sensori/attuatori e di poter definire
+          regole di automazione basate su eventi. Le tecnologie utilizzate sono prevalentemente Scala, Akka e Prolog.
+      - title: Scanbage
+        meta: Open Source | Università
+        tagline: >-
+          Una potente web app per riconoscere i tipi di spazzatura tramite foto o codice a barre tramite rete convuluzionale (CNN Machine Learning).
+          Si tratta di una sorta di social basati su premi sbloccati attraverso la corretta differenziazione dei rifiuti.
+          Il progetto è stato realizzato in contesto universitario con Gianluca Aguzzi, Marta Luffarelli e Simone Letizi.
+      - title: Fluvium
+        meta: Open Source | Università
+        tagline: >-
+          Un sistema full stack per il monitoraggio del livello di innalzamento dei fiumi. Il sistema è stato sviluppato partendo da componenti embedded (ESP32) fino al livello web/cloud basato su AWS.
+          Il progetto è realizzato in contesto universitario con Gianluca Aguzzi.
+      - title: Face Sketch Recognition - CBIR
+        meta: Computer Vision  | Università
+        tagline: >-
+          Progetto universitario volto alla ricerca di volti in base alla similirità di sketch ottenuti manualmente o tramite software di identikit.
+      - title: Home Assistant Tapo P100 Integration
+        meta: Open Source | Home Automation
+        tagline: >-
+          Integrazione per il controllo di smart plug e luci intelligenti della linea [Tapo](https://www.tapo.com/en/) tramite il noto assistente domotico [Home Assistant](https://www.home-assistant.io/). 
+          Realizzata principlamente in Python, si tratta della principale integrazione utilizzata nella comunita di Home Assistant. 
+      - title: Subspedia
+        meta: App Android
+        tagline: >-
+          Applicazione mobile per il sito web di sottotitoli Subspedia (ormai dismesso).
+  information:
+    enable: false
+    #list: # TODO: aggiungere paper di web
+    #  - title: Papers
+    #    items:
+    #      - details: 2018 · Lorem Ipsum
+    #  - title: Interests
+    #    details: 'Climbing, Snowboarding, Photography, Travelling'
+  social:
+    enable: true
+    list:
+      - icon: fab fa-github-square
+        url: //github.com/petretiandrea
+        title: GitHub
+      - icon: fab fa-linkedin
+        url: //linkedin.com/in/andrea-petreti
+        title: LinkedIn
