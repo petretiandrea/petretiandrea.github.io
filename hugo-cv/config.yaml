@@ -12,7 +12,7 @@ params:
     enable: true
     name: Andrea Petreti
     #agline: 'TODO: add role e.g. Software Dev or Engineer or other'
-    #avatar: avatar.png
+    avatar: my-avatar-round.png
   contact:
     enable: true
     location: Italy

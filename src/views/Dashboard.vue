@@ -8,7 +8,7 @@
                 <v-content class="text-center">
                     <v-row align="center" justify="center">   
                         <v-col class="text-right">
-                            <v-avatar size="100">
+                            <v-avatar size="150">
                                 <img :src="require('@/assets/my-avatar.png')" alt="Andrea Petreti"/>
                             </v-avatar>
                         </v-col>
