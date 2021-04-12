@@ -1,6 +1,6 @@
 <template>
     <v-container class="white--text py-16 px-4">
-        <v-row><v-col class="text-h4" >About Me</v-col></v-row>
+        <v-row><v-col class="text-h4" >Su di me</v-col></v-row>
         <v-row>
             <v-col class="mx-auto">
                 Ho conseguito la laurea triennale in Informatica Applicata presso Urbino, ho in seguito deciso di approfondire il 
