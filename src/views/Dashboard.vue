@@ -12,7 +12,7 @@
                                 <img :src="require('@/assets/my-avatar.png')" alt="Andrea Petreti"/>
                             </v-avatar>
                         </v-col>
-                        <v-col class="text-left">
+                        <v-col class="text-left title">
                             Ciao, sono Andrea Petreti!
                         </v-col>
                         <v-col cols="12">
@@ -22,6 +22,9 @@
                             <v-btn text icon href="https://profile.codersrank.io/user/petretiandrea" target="_blank">
                                 <icon data="@/assets/icons/coders-rank.svg" width="24" color="#0000008a"/>
                             </v-btn>
+                        </v-col>
+                        <v-col cols="12" v-if="$vuetify.breakpoint.smAndDown"> 
+                            <v-btn text outlined color="white" large href="/cv">Il mio curriculum</v-btn>
                         </v-col>
                     </v-row>
                 </v-content>

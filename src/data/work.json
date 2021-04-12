@@ -1,19 +1,25 @@
 [  
     {
+        "title": "Intelliserra",
+        "description": "Framework per la gestione di serre intelligenti sviluppato in Scala. Il framwork consente di definire serre intelligenti attraverso sensori/attuatori e di poter definire regole di automazione basate su eventi. Le tecnologie utilizzate sono prevalentemente Scala, Akka e Prolog. Sviluppato in collaborazione con Marta Luffarelli e Simone Letizi e Ylenia Battistini.",
+        "thumbnail": "intelliserra/intelliserra.png",
+        "image_gallery": ["intelliserra/intelliserra.png", "intelliserra/intelliserra2.png"]
+    },
+    {
         "title": "Scanbage",
-        "description": "A powerful web app to recognize the garbage types using photo or bar code. It's like a social where people try to unlock achievements based on garbage collection.",
+        "description": "Una potente web app per riconoscere i tipi di spazzatura tramite foto o codice a barre tramite rete convuluzionale (CNN Machine Learning). Si tratta di una sorta di social basati su premi sbloccati attraverso la corretta differenziazione dei rifiuti. Il progetto è stato realizzato in contesto universitario con Gianluca Aguzzi, Marta Luffarelli e Simone Letizi.",
         "thumbnail": "scanbage/thubnail.png",
         "image_gallery": ["scanbage/scanbage-pic1.png", "scanbage/scanbage-pic2.png", "scanbage/scanbage-pic3.png", "scanbage/scanbage-pic4.png", "scanbage/scanbage-pic5.png"]
     },
     {
         "title": "Fluvium",
-        "description": "Aaaaaaaaa",
+        "description": "Un sistema full stack per il monitoraggio del livello di innalzamento dei fiumi. Il sistema è stato sviluppato partendo da componenti embedded (ESP32) fino al livello web/cloud basato su AWS. Il progetto è realizzato in contesto universitario con Gianluca Aguzzi.",
         "thumbnail": "fluvium/thubnail.png",
         "image_gallery": ["fluvium/screen1.png", "fluvium/screen2.png", "fluvium/screen3.png"]
     },
     {
         "title": "Subspedia",
-        "description": "Application developed for <a target=\"_blank\" href=\"https://www.subspedia.tv/\"> subspedia.tv</a>. It allows the management of their favorite TV series and the download of subtitles produced by the Subpsedia community.",
+        "description": "Applicazione Android sviluppata per <a target=\"_blank\" href=\"https://www.subspedia.tv/\"> subspedia.tv</a>. Permette la gestione delle loro serie TV preferite e il download dei sottotitoli prodotti dalla comunità Subpsedia.",
         "thumbnail": "subspedia/thubnail.png",
         "image_gallery": ["subspedia/pic1.png", "subspedia/pic2.png", "subspedia/pic3.png", "subspedia/pic4.png"]
     }

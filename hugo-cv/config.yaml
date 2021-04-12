@@ -11,7 +11,7 @@ params:
   profile:
     enable: true
     name: Andrea Petreti
-    tagline: 'TODO: add role e.g. Software Dev or Engineer or other'
+    #agline: 'TODO: add role e.g. Software Dev or Engineer or other'
     avatar: avatar.png
   contact:
     enable: true
@@ -40,9 +40,7 @@ params:
           - details: DevOps/Gradle/Continous Integration
       - title: Professional
         items:
-          - details: Effective communication
           - details: Team player
-          - details: Strong problem solver
           - details: Buona gestione del tempo
   education:
     enable: true
@@ -82,14 +80,11 @@ params:
   summary:
     enable: true
     text: >-
-      Summarise your career here. Donec quam felis, ultricies nec, pellentesque
-      eu. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-      commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et
-      magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-      ultricies nec, pellentesque eu, pretium quis, sem.  Maecenas nec odio et
-      ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
-      Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis
-      leo. Sed fringilla mauris sit amet nibh.
+      Ho conseguito la laurea triennale in Informatica Applicata presso Urbino; in seguito ho deciso di approfondire i miei 
+      studi con una laurea magistrale in Ingegneria e Scienze Informatiche presso l'Università di Bologna (sede Cesena).
+      Durante quest'ultimo percorso ho deciso di focalizzarmi verso il mondo dell'ingegneria del software; amo la qualità del codice.
+      Il percorso di studi, inoltre, mi ha consentito di acquisire abilità relative alla Computer Vision sia mediante tecniche tradizionali sia tramite machine learning.
+      Sono particolarmente appassionato al mondo relativo all'IoT, alla robotica e all'intelligenza artificiale. In generale mi diverto con ogni sfida relativa al mondo dell'IT. 
   experience:
     enable: true
     list:
@@ -114,7 +109,7 @@ params:
         meta: Open Source | Università
         tagline: >-
           Framework per la gestione di serre intelligenti sviluppato in Scala. Il framwork consente di definire serre intelligenti attraverso sensori/attuatori e di poter definire
-          regole di automazione basate su eventi. Le tecnologie utilizzate sono prevalentemente Scala, Akka e Prolog.
+          regole di automazione basate su eventi. Le tecnologie utilizzate sono prevalentemente Scala, Akka e Prolog. Sviluppato in collaborazione con Marta Luffarelli e Simone Letizi e Ylenia Battistini.
       - title: Scanbage
         meta: Open Source | Università
         tagline: >-
