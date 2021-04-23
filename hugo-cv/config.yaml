@@ -32,6 +32,7 @@ params:
       - title: Technical
         items:
           - details: Computer Vision Skills (OpenCV + Machine Learning CNN)
+          - details: Android
           - details: Java/Kotlin/Scala
           - details: C/C++
           - details: JavaScript/Vue
