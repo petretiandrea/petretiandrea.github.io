@@ -39,6 +39,7 @@
     "fibers": "^5.0.0",
     "sass": "^1.32.8",
     "sass-loader": "^9.0.3",
+    "vue-cli-plugin-yaml": "^1.0.2",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

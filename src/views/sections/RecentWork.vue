@@ -17,14 +17,14 @@
 
 <script>
 import Project from '@/components/Project'
-import works from '@/data/work.json'
+import works from '@/data/work.yml'
 
 export default {
     components: {
         'project': Project
     },
     data: () => ({
-        projects: works
+        projects: works.works
     })
 }
 </script>

@@ -50,10 +50,10 @@ params:
         university: Università di Bologna (Campus Cesena) \\ 110/110 e lode
         dates: '2021'
       - degree: Laurea Informatica Applicata
-        university: Università degli Studi di Urbino Carlo Bo
+        university: Università degli Studi di Urbino Carlo Bo \\ 108/110
         dates: '2018'
       - degree: Diploma in Informatica
-        university: ITIS E. Mattei Urbino
+        university: ITIS E. Mattei Urbino \\ 86/100
         dates: '2015'
   awards:
     enable: false

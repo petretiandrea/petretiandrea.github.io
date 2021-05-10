@@ -148,3 +148,9 @@ hugo-cv/public
 
 # where hugo generate its static website code
 public/cv
+
+### Hugo ###
+# Generated files by hugo
+hugo-cv/public/
+hugo-cv/resources/_gen/
+hugo-cv/hugo_stats.json

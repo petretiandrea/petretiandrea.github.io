@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import experiences from '@/data/experiences.json'
+import experiences from '@/data/experiences.yml'
 
 export default {
     data: () => ({
-        experiences: experiences.reverse()
+        experiences: experiences.experiences.reverse()
     }),
     methods: {
         timelineTextAlign: function(index) {
