@@ -21,7 +21,7 @@
     "core-js": "^3.6.5",
     "env-cmd": "^10.1.0",
     "html-loader": "^2.1.2",
-    "vue": "^2.6.12",
+    "vue": "^2.6.14",
     "vue-custom-element": "^3.3.0",
     "vue-router": "^3.3.4",
     "vuetify": "^2.4.7"
@@ -40,7 +40,7 @@
     "sass": "^1.32.8",
     "sass-loader": "^9.0.3",
     "vue-cli-plugin-yaml": "^1.0.2",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
