@@ -31,7 +31,7 @@
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-service": "~4.5.13",
     "@yzfe/svgicon-loader": "^1.0.4",
-    "@yzfe/vue-cli-plugin-svgicon": "~1.0.3",
+    "@yzfe/vue-cli-plugin-svgicon": "~1.0.4",
     "babel-eslint": "^10.1.0",
     "deepmerge": "^4.2.2",
     "eslint": "^6.7.2",
