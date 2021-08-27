@@ -6,6 +6,8 @@ title: Andrea Petreti - CV
 
 languages:
   en:
+    languageName: "English"
+    languageIcon: "assets/gb.png"
     skills:
       enable: true
       list:
@@ -115,6 +117,8 @@ languages:
             Management of small projects in collaboration with [Loccioni](http://loccioni.com)
     
   it:
+    languageName: "Italiano"
+    languageIcon: "assets/it.png"
     skills:
       enable: true
       list:
