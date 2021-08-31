@@ -12,7 +12,7 @@ languages:
       enable: true
       list:
         - title: Technical
-          items:
+          items: &tech-skills
             - details: Computer Vision Skills (OpenCV + Machine Learning CNN)
             - details: Android
             - details: Java/Kotlin/Scala
@@ -20,7 +20,8 @@ languages:
             - details: JavaScript/Vue
             - details: Python
             - details: Node.js
-            - details: DevOps/Gradle/Continous Integration
+            - details: Dart
+            - details: DevOps/Gradle/Continous Integration (like Jenkins)
         - title: Professional
           items:
             - details: Team player
@@ -105,9 +106,13 @@ languages:
         - title: Android and Flutter Developer
           dates: May 2021 - now
           company: Sysdata s.p.a
-          details: >-
-            Android and Flutter developer for different customers like Maserati, Allianz, Japan Tobacco and so on. 
-            Java/Kotlin/Dart.
+          details: |
+            Android and Flutter developer. Main projects and technologies:
+            - AllianzNow App (Android - Java)
+            - Japan Tobacco Ambassador App (Flutter)
+            - Maserati Owner App (Android - Kotlin)
+            - MyCRA App (Android - Java)
+            - Snam (Android - Kotlin)
         - title: Full Stack Developer
           dates: 6 month 2018 - 2018
           company: Green Dreams (Startup)
@@ -123,15 +128,7 @@ languages:
       enable: true
       list:
         - title: Technical
-          items:
-            - details: Computer Vision Skills (OpenCV + Machine Learning CNN)
-            - details: Android
-            - details: Java/Kotlin/Scala
-            - details: C/C++
-            - details: JavaScript/Vue
-            - details: Python
-            - details: Node.js
-            - details: DevOps/Gradle/Continous Integration
+          items: *tech-skills
         - title: Professional
           items:
             - details: Team player
@@ -215,9 +212,13 @@ languages:
         - title: Android and Flutter Developer
           dates: Maggio 2021 - adesso
           company: Sysdata s.p.a
-          details: >-
-            Android e Flutter developer per vari clienti come Maserati, Allianz, Japan Tobacco e altri. 
-            Tecnologie principali: Java/Kotlin/Dart.
+          details: |
+            Android e Flutter developer. Principali progetti e relative tecnologie:
+            - AllianzNow App (Android - Java)
+            - Japan Tobacco Ambassador App (Flutter)
+            - Maserati Owner App (Android - Kotlin)
+            - MyCRA App (Android - Java)
+            - Snam (Android - Kotlin)
         - title: Full Stack Developer
           dates: 6 mesi 2018 - 2018
           company: Green Dreams (Startup)
