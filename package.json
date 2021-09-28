@@ -27,7 +27,7 @@
     "vuetify": "^2.4.7"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-babel": "~4.5.13",
     "@vue/cli-plugin-eslint": "~4.5.13",
     "@vue/cli-service": "~4.5.13",
     "@yzfe/svgicon-loader": "^1.0.5",
