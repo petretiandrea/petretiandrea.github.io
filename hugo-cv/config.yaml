@@ -15,17 +15,19 @@ languages:
           items: &tech-skills
             - details: Computer Vision Skills (OpenCV + Machine Learning CNN)
             - details: Android
+            - details: Flutter(Dart)
             - details: Java/Kotlin/Scala
             - details: C/C++
             - details: JavaScript/Vue
-            - details: Python
+            - details: Python/Keras
             - details: Node.js
-            - details: Dart
             - details: DevOps/Gradle/Continous Integration (like Jenkins)
+            - details: Functional and Reactive Programming
         - title: Professional
           items:
             - details: Team player
             - details: Good time management
+            - details: Proactive Learning
     education:
       enable: true
       list:
@@ -51,7 +53,7 @@ languages:
         - name: Home automation
         - name: Maker
         - name: Ski
-        - name: Travel
+        - name: Travelling
         - name: Technology
     projects:
       enable: true
@@ -108,6 +110,7 @@ languages:
           company: Sysdata s.p.a
           details: |
             Android and Flutter developer. Main projects and technologies:
+            - Luxottica - Leonardo (Android - Kotlin)
             - AllianzNow App (Android - Java)
             - Japan Tobacco Ambassador App (Flutter)
             - Maserati Owner App (Android - Kotlin)
@@ -133,6 +136,7 @@ languages:
           items:
             - details: Team player
             - details: Buona gestione del tempo
+            - details: Proattivo
     education:
       enable: true
       list:
@@ -214,6 +218,7 @@ languages:
           company: Sysdata s.p.a
           details: |
             Android e Flutter developer. Principali progetti e relative tecnologie:
+            - Luxottica - Leonardo (Android - Kotlin)
             - AllianzNow App (Android - Java)
             - Japan Tobacco Ambassador App (Flutter)
             - Maserati Owner App (Android - Kotlin)
