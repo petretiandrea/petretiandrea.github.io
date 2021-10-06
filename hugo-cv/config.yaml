@@ -8,6 +8,7 @@ languages:
   en:
     languageName: "English"
     languageIcon: "assets/gb.png"
+    curriculumPdf: "assets/cvs/andreapetreti-en.pdf"
     skills:
       enable: true
       list:
@@ -127,6 +128,7 @@ languages:
   it:
     languageName: "Italiano"
     languageIcon: "assets/it.png"
+    curriculumPdf: "assets/cvs/andreapetreti-it.pdf"
     skills:
       enable: true
       list:
