@@ -25,6 +25,11 @@ jobs:
         run: |
           npm install
         
+      - name: Generate static CV PDFs
+        run: |
+          chmod +x ./generate-cv.sh
+          ./generate-cv.sh 
+        
       - name: Build hugo cv 🔧
         run: |
           npm run build-github-hugo
