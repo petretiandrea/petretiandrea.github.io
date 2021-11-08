@@ -20,7 +20,7 @@
     "@yzfe/vue-svgicon": "^4.0.2",
     "core-js": "^3.18.1",
     "env-cmd": "^10.1.0",
-    "html-loader": "^2.1.2",
+    "html-loader": "^3.0.1",
     "puppeteer": "^10.4.0",
     "vue": "^2.6.14",
     "vue-custom-element": "^3.3.0",
