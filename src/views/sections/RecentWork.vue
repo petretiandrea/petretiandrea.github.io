@@ -5,11 +5,11 @@
         </v-row>
         <v-row dense class="mt-3">
             <v-col v-for="(project, index) in projects" :key="index" class="d-flex child-flex" cols="12" xl="3" lg="4" md="6" sm="6">
-                <project :title="project.title" 
+                <project-item :title="project.title" 
                         :thumbnail="project.thumbnail" 
                         :image_gallery="project.image_gallery">
                     <template #description><div v-html=project.description /></template>
-                </project>
+                </project-item>
             </v-col>
         </v-row>
     </v-container>
@@ -21,7 +21,7 @@ import works from '@/data/work.yml'
 
 export default {
     components: {
-        'project': Project
+        'project-item': Project
     },
     data: () => ({
         projects: works.works

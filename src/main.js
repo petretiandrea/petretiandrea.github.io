@@ -18,7 +18,7 @@ Vue.customElement('codersrank-summary', CodersrankSummary)
 
 Vue.config.productionTip = false
 
-Vue.component('icon', VueSvgIcon)
+Vue.component('icon-svg', VueSvgIcon)
 
 new Vue({
   router,

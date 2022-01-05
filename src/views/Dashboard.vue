@@ -20,7 +20,7 @@
                             <v-btn text icon href="https://www.linkedin.com/in/andrea-petreti/" target="_blank"><v-icon>mdi-linkedin</v-icon></v-btn>
                             <v-btn text icon href="mailto:petretiandrea@gmail.com" target="_blank"><v-icon>mdi-email</v-icon></v-btn>
                             <v-btn text icon href="https://profile.codersrank.io/user/petretiandrea" target="_blank">
-                                <icon data="@/assets/icons/coders-rank.svg" width="24" color="#0000008a"/>
+                                <icon-svg data="@/assets/icons/coders-rank.svg" width="24" color="#0000008a"/>
                             </v-btn>
                         </v-col>
                         <v-col cols="12" v-if="$vuetify.breakpoint.smAndDown"> 
@@ -63,6 +63,7 @@ import workSection from '@/views/sections/RecentWork'
 import aboutMe from '@/views/sections/AboutMe'
 
 export default {
+    name: 'main-dashboard',
     data: () => ({
         icons: [
             {
