@@ -109,13 +109,8 @@ languages:
           dates: May 2021 - now
           company: Sysdata s.p.a
           details: |
-            Android and Flutter developer. Main projects and technologies:
-            - Luxottica - Leonardo (Android - Kotlin)
-            - AllianzNow App (Android - Java)
-            - Japan Tobacco Ambassador App (Flutter)
-            - Maserati Owner App (Android - Kotlin)
-            - MyCRA App (Android - Java)
-            - Snam (Android - Kotlin)
+            Android and Flutter developer. Main technologies used are Kotlin with Compose and Flows, Java and Flutter (Dart).
+            Working on 2 Kotlin native app, 2 Java native app and 1 flutter app. Mainly focused on Kotlin Compose.
         - title: Full Stack Developer
           dates: 6 month 2018 - 2018
           company: Green Dreams (Startup)
@@ -218,13 +213,9 @@ languages:
           dates: Maggio 2021 - adesso
           company: Sysdata s.p.a
           details: |
-            Android e Flutter developer. Principali progetti e relative tecnologie:
-            - Luxottica - Leonardo (Android - Kotlin)
-            - AllianzNow App (Android - Java)
-            - Japan Tobacco Ambassador App (Flutter)
-            - Maserati Owner App (Android - Kotlin)
-            - MyCRA App (Android - Java)
-            - Snam (Android - Kotlin)
+            Android e Flutter developer. Le principali tecnologie utilizzare sono Kotlin con il nuovo framework Compose, Java e Flutter.
+            Attualmente lavoro su 2 app native Kotlin, 2 app native Java e 1 app ibrida in Flutter. Ora principalmente mi occupo
+            dell'utilizzo del nuovo framework Compose.
         - title: Full Stack Developer
           dates: 6 mesi 2018 - 2018
           company: Green Dreams (Startup)
