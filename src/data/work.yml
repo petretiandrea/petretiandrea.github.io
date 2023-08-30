@@ -1,5 +1,12 @@
-
 works:
+  - title: "Beaesthetic Agenda"
+    description: |
+      Applicazione e backend per la gestione di appuntamenti di un centro estetico. Il sistema permette di gestire clienti,
+      appuntamenti e carte fedeltà. Inoltre è in grado di inviare notifiche via Sms, Whatsapp e in futuro push notification
+      ai clienti per ricordare un appuntamento.
+    thumbnail: "intelliserra/intelliserra.png"
+    image_gallery: ["intelliserra/intelliserra.png", "intelliserra/intelliserra2.png"]
+    
   - title: "Intelliserra"
     description: |
       Framework per la gestione di serre intelligenti sviluppato in Scala. 

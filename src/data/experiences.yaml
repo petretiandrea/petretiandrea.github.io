@@ -25,3 +25,10 @@ experiences:
     color: "orange"
     icon: "mdi-briefcase"
     description: "Sviluppatore Android (Java/Kotlin) e Flutter presso Sysdata s.p.a."
+  - from: "06/20/2022"
+    title: "Software Engineer"
+    color: "orange"
+    icon: "mdi-briefcase"
+    description: | 
+      Software Engineer presso PagoPA s.p.a.
+      Work on the design and development of microservice architectures.

@@ -1,0 +1,31 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+
+// https://vuetifyjs.com/features/sass-variables/`
+// @use 'vuetify/settings' with (
+//   $color-pack: false
+// );
+
+
+/* Define the SaaS class */
+.strict-container {
+  max-width: 100%; /* Default max-width */
+
+  /* Media query for screen width 960px and above */
+  @media (min-width: 960px) {
+    max-width: 900px;
+  }
+
+  /* Media query for screen width 1264px and above */
+  @media (min-width: 1264px) {
+    max-width: 1185px;
+  }
+
+  /* Media query for screen width 1904px and above */
+  @media (min-width: 1904px) {
+    max-width: 1785px;
+  }
+}

@@ -1,19 +1,12 @@
 <template>
   <v-app>
     <AppBar/>
-    <v-main>
+    <v-main class="pt-0">
       <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
-<script>
+<script setup>
 import AppBar from './components/AppBar.vue'
-
-export default {
-  name: 'App',
-  components: {
-    AppBar
-  }
-}
 </script>

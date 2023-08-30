@@ -1,14 +1,15 @@
 import '@mdi/font/css/materialdesignicons.css'
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import 'vuetify/styles'
 
-Vue.use(Vuetify)
+import {createVuetify} from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
-const opts = {
+export default new createVuetify({
     icons: {
-        iconfont: 'mdi', // default - only for display purposes
-    },
-}
-
-export default new Vuetify(opts)
+        defaultSet: 'mdi',
+        aliases,
+        sets: {
+            mdi,
+        },
+    }
+})
