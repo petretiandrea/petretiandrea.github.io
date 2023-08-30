@@ -15,7 +15,7 @@
               <v-btn
                 v-else
                 :x-small="$vuetify.display.smAndDown"
-                @click="menuItemClick(item)"
+                @click="scrollToId(item.goto_id)"
                 variant="text">{{ item.section_name }}</v-btn>
             </template>
           </v-toolbar-items>
@@ -28,7 +28,7 @@
             </template>
             <v-list>
               <v-list-item v-for="item in hamburgerMenuItems" :key="item.tag">
-                  <v-list-item-title @click="menuItemClick(item)">
+                  <v-list-item-title @click="scrollToId(item.goto_id)">
                     {{ item.section_name }}
                   </v-list-item-title>
               </v-list-item>
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-
 import DropdownCV from "@/components/DropdownCV.vue";
 
 export default {
@@ -48,21 +47,21 @@ export default {
   data: () => ({
     appBarScrolled: false,
     menu: [
-      { section_name: "Su di me", tag: "about", goto_id: "#section-about-me"},
-      { section_name: "Progetti", tag: "works", goto_id: "#recent-works"},
-      { section_name: "Contatti", tag: "contact", goto_id: "#contact"},
+      { section_name: "Su di me", tag: "about", goto_id: "section-about-me"},
+      { section_name: "Progetti", tag: "works", goto_id: "recent-works"},
+      { section_name: "Contatti", tag: "contact", goto_id: "contact"},
       { section_name: "Curriculum", tag: "cv" }
     ]
   }),
   methods: {
-    menuItemClick: function(item) {
-      if('goto_id' in item) {
-        this.$vuetify.goTo(item.goto_id, this.options)
-      }
-    },
     handleScroll: function () {
       const currentPosition = window.scrollY
       this.appBarScrolled = currentPosition !== 0;
+    },
+    scrollToId: function (itemId) {
+      // cause $vuetify.goTo not working now
+      const element = document.getElementById(itemId);
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   },
   computed: {
