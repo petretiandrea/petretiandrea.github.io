@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     getImage: function (path) {
-      return `src/assets/` + path
+      return new URL(`/src/assets/${path}`, import.meta.url).href
     }
   }
 }
