@@ -6,9 +6,9 @@
         <h3
           class="mb-4 text-4xl text-slate-700 tracking-tight font-bold dark:text-slate-200"
         >
-          <NuxtLink :to="{ name: 'slug', params: { slug: postSlug } }">
-            {{ postTitle }}</NuxtLink
-          >
+          <NuxtLink :to="{ name: 'blog-slug', params: { slug: postSlug } }">
+            {{ postTitle }}
+          </NuxtLink>
         </h3>
   
         <div class="mb-6 prose prose-slate dark:prose-dark">

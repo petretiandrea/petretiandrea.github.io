@@ -1,58 +1,40 @@
 <template>
-    <div>
-        <header class="pt-16 pb-9 sm:pb-16 sm:text-center">
-            <h1 class="mb-4 text-8xl sm:text-4xl tracking-tight text-slate-800 font-extrabold dark:text-slate-200">
-                Blog
-            </h1>
-            <p class="text-lg text-slate-700 dark:text-slate-400">
-                All the latest Tailwind CSS news, straight from the&nbsp;team.
-            </p>
-        </header>
-        <div class="space-y-16 mx-auto max-w-7xl">
-            <blog-item v-for="article in articles" :key="article.title" :title="article.title"
-                :description="article.description" :date="article.date" :slug="article.slug"></blog-item>
-        </div>
+  <div class="dark:bg-gray-900 mt-6">
+    <div class="max-w-screen-lg md:flex mx-auto dark:bg-gray-900">
+      <div class="md:w-1/3 p-2 md:flex md:justify-center">
+        <AuthorCard />
+      </div>
+      <div class="md:w-2/3 px-8">
+        <AuthorIntro></AuthorIntro>
+        <!-- <Expertise></Expertise> -->
+        <TimeLine></TimeLine>
+      </div>
     </div>
+  </div>
 </template>
 
-<script setup>
-const { data: articles } = await useAsyncData('articles', () => queryContent('/')
-    .only([
-        "title",
-        "description",
-        "img",
-        "slug",
-        "tag",
-        "author",
-        "date",
-        "draft",
-    ])
-    .sort({ date: 1 })
-    .find()
-);
-</script>
-
 <script>
-import BlogItem from "../components/BlogItem.vue";
-
+import siteMetaInfo from "@/data/siteinfo";
 export default {
-    components: [
-        BlogItem
+  data() {
+    return {
+      siteMetaInfo: siteMetaInfo,
+    };
+  },
+  head: {
+    title: siteMetaInfo.title,
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: siteMetaInfo.description,
+      },
     ],
-    head: {
-        title: "Md Solaiman | Blogs",
-        meta: [
-            { charset: "utf-8" },
-            { name: "viewport", content: "width=device-width, initial-scale=1" },
-            {
-                hid: "description",
-                name: "description",
-                content: "Its Solaiman's Pen and Paper to write ",
-            },
-        ],
-        link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    },
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+  },
 };
 </script>
-  
+
 <style></style>

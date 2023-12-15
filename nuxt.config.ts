@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
-    'nuxt-simple-sitemap'
+    'nuxt-simple-sitemap',
+    'nuxt-icon'
   ],
   $meta: [
     { charset: "utf-8" },
