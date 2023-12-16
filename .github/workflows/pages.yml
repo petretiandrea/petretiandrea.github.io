@@ -23,8 +23,8 @@ jobs:
 
       - name: Generate static CV PDFs
         run: |
-          chmod +x ./pdf-cv-generator/generate-cv.sh
-          ./pdf-cv-generator/generate-cv.sh 
+          chmod +x ./pdf-cv-generator/generate.sh
+          ./pdf-cv-generator/generate.sh 
 
       - name: Build hugo cv 🔧
         run: |
