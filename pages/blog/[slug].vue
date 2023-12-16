@@ -41,14 +41,14 @@ export default {
     },
     setup: async () => {
         const { params } = useRoute()
-        const { data: article } = await useAsyncData('article', () => queryContent('/', params.slug).findOne());
+        const { data: article } = await useAsyncData('article', () => queryContent('/blog', params.slug).findOne());
         return {
             article: article
         }
     },
     mounted() {
         const { $Prism } = useNuxtApp();
-        $Prism.highlightAll();
+        //$Prism.highlightAll();
     },
     head() {
         //console.log(this.article.title);

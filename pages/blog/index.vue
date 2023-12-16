@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-const { data: articles } = await useAsyncData('articles', () => queryContent('/')
+const { data: articles } = await useAsyncData('articles', () => queryContent('/blog')
     .only([
         "title",
         "description",
