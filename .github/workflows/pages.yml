@@ -21,6 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Generate static CV PDFs
+        run: |
+          chmod +x ./pdf-cv-generator/generate-cv.sh
+          ./pdf-cv-generator/generate-cv.sh 
+
+      - name: Build hugo cv 🔧
+        run: |
+          npm run build-github-hugo
+
       - name: Generate
         run: npm run generate
 
