@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "serve-hugo": "cd hugo-cv & hugo server -D",
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "build-dev-hugo": "rm -rf ../public/cv/ & env-cmd -e development --use-shell \"cd hugo-cv && hugo -D -d ../public/cv/\"",
+    "build-github-hugo": "rm -rf ../public/cv/ & env-cmd -e production --use-shell \"cd hugo-cv && hugo -D -d ../public/cv/\""
   },
   "devDependencies": {
     "@modyfi/vite-plugin-yaml": "^1.0.4",
@@ -15,9 +19,11 @@
     "@nuxtjs/tailwindcss": "^6.10.1",
     "@tailwindcss/typography": "^0.5.10",
     "@types/prismjs": "^1.26.3",
+    "env-cmd": "^10.1.0",
     "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.7",
     "nuxt-simple-sitemap": "^4.1.6",
+    "puppeteer": "^21.6.1",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
