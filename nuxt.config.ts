@@ -27,5 +27,8 @@ export default defineNuxtConfig({
     "vite:extendConfig": (config) => {
       config.plugins?.push(ViteYaml());
     },
+  },
+  image: {
+    dir: 'public/img'
   }
 })

@@ -19,11 +19,9 @@
               :key="item.title"
               :title="item.title"
               :description="item.description"
-              :href="item.href"
               :github="item.github"
-              :tech1="item.tech1"
-              :tech2="item.tech2"
-              :tech3="item.tech3"
+              :thumbnail="item.thumbnail"
+              :tags="item.tags"
             ></project-card>
           </div>
         </div>
@@ -33,11 +31,11 @@
 </template>
 
 <script>
-import projectsData from "../../data/projects";
+import projects from '@/data/projects.yaml'
 export default {
   data() {
     return {
-      projectsData: projectsData,
+      projectsData: projects.works,
     };
   },
   head: {

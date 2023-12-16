@@ -9,24 +9,14 @@
             <!-- <Folder class="text-indigo-800"></Folder> -->
           </div>
           <div class="flex flex-row justify-between">
-            <div class="mx-1">
-              <a
-                class="text-sm text-gray-500 transition hover:text-gray-600"
-                target="_blank"
-                rel="noopener noreferrer"
-                :href="projectHref"
-                ><span class="sr-only"></span
-                ><img class="w-6 h-6" src="~assets/icon/external.svg"
-              /></a>
-            </div>
-            <div class="mx-1">
+            <div class="mx-1" v-if="projectGithub">
               <a
                 class="text-sm text-gray-500 transition hover:text-gray-600"
                 target="_blank"
                 rel="noopener noreferrer"
                 :href="projectGithub"
                 ><span class="sr-only">github</span
-                ><img class="w-6 h-6" src="~assets/icon/github_new.svg"
+                ><Icon class="w-4 h-4" name="fa:github"
               /></a>
             </div>
           </div>
@@ -34,12 +24,11 @@
         <h2 class="text-2xl font-bold leading-8 tracking-tight mb-3">
           {{ projectTitle }}
         </h2>
-        <p class="prose text-gray-500 max-w-none dark:text-gray-400 mb-3">
-          {{ projectDescription }}
-        </p>
+        <NuxtImg :src="projectThumbnail"/>
+        <p class="prose text-gray-500 max-w-none dark:text-gray-400 mb-3" v-html="projectDescription"></p>
         <div class="flex flex-row justify-between">
           <div class="text-gray-400 text-sm font-extralight">
-            {{ projectTech1 }} • {{ projectTech2 }} • {{ ProjectTech3 }}
+            {{ formatTags(projectTags) }}
           </div>
         </div>
       </div>
@@ -48,23 +37,23 @@
 </template>
 
 <script>
-// import Folder from "../assets/icon/folder.svg?inline";
-// import External from "../assets/icon/external.svg?inline";
-// import Github from "../assets/icon/github.svg?inline";
 export default {
-  props: ["title", "description", "href", "github", "tech1", "tech2", "tech3"],
-//   components: { Folder, External, Github },
+  props: ["title", "description", "thumbnail", "github", "tags"],
   data() {
     return {
       projectTitle: this.title,
       projectDescription: this.description,
-      projectHref: this.href,
       projectGithub: this.github,
-      projectTech1: this.tech1,
-      projectTech2: this.tech2,
-      ProjectTech3: this.tech3,
+      projectTags: this.tags,
+      projectThumbnail: this.thumbnail
     };
   },
+  methods: {
+    formatTags: (tags) => {
+      console.log(tags)
+      return (tags ?? []).join(' • ')
+    }
+  }
 };
 </script>
 
