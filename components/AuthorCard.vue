@@ -26,16 +26,16 @@
     </div>
 
     <div class="mx-7 hidden md:block">
-      <div class="my-2 text-gray-600 flex dark:text-blue-100">
-        <Icon name="ic:baseline-mail" color="black"/>
-        <a :href="`mailto:${siteMetadata.email}`"> {{ siteMetadata.email }}</a>
+      <div class="my-2 text-gray-600 flex dark:text-blue-100 items-center">
+        <Icon name="ic:baseline-mail" color="black" class="w-5 h-5 mr-1"/>
+        <a class="align-middle" :href="`mailto:${siteMetadata.email}`"> {{ siteMetadata.email }}</a>
       </div>
-      <div class="my-2 text-gray-600 flex dark:text-blue-100">
-        <Icon name="material-symbols:globe" color="black" />
+      <div class="my-2 text-gray-600 flex dark:text-blue-100 items-center">
+        <Icon name="material-symbols:globe" color="black" class="w-5 h-5 mr-1" />
         <p>{{ siteMetadata.location }}</p>
       </div>
-      <div class="my-2 text-gray-600 flex dark:text-blue-200">
-        <Icon name="grommet-icons:github" color="black"/>
+      <div class="my-2 text-gray-600 flex dark:text-blue-200 items-center">
+        <Icon name="grommet-icons:github" color="black" class="w-5 h-5 mr-1"/>
         <a :href="siteMetadata.github"> {{ siteMetadata.githubUser }}</a>
       </div>
     </div>

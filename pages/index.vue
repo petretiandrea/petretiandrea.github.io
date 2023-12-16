@@ -7,7 +7,7 @@
       <div class="md:w-2/3 px-8">
         <AuthorIntro></AuthorIntro>
         <!-- <Expertise></Expertise> -->
-        <TimeLine></TimeLine>
+        <Timeline></Timeline>
       </div>
     </div>
   </div>

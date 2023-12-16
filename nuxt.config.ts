@@ -1,3 +1,4 @@
+import ViteYaml from '@modyfi/vite-plugin-yaml';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -22,4 +23,9 @@ export default defineNuxtConfig({
   site: {
     url: 'https://example.com',
   },
+  hooks: {
+    "vite:extendConfig": (config) => {
+      config.plugins?.push(ViteYaml());
+    },
+  }
 })

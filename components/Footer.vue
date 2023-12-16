@@ -23,14 +23,7 @@
           :href="`mailto:${siteMetadata.email}`"
           ><span class="sr-only">mail</span>
           <Icon class="w-8 h-8" name="fa:envelope" /></a
-        ><a
-          class="text-sm text-gray-500 transition hover:text-gray-600"
-          target="_blank"
-          rel="noopener noreferrer"
-          :href="siteMetadata.facebook"
-          ><span class="sr-only">facebook</span>
-          <Icon class="w-8 h-8" name="fa:facebook-square"
-        /></a>
+        >
       </div>
       <div class="flex mb-2 space-x-2 text-sm text-gray-500 dark:text-gray-400">
         <div>Copyright © {{ new Date().getFullYear() }}</div>

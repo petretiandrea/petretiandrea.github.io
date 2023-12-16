@@ -1,10 +1,10 @@
 <template>
   <!-- Section 1 -->
-  <section class="w-full px-6 pb-12 antialiased bg-white">
-    <div class="mx-auto max-w-8xl">
+  <section class="w-full px-6 pb-12 antialiased bg-white fill-viewport">
+    <div class="mx-auto max-w-8xl fill-viewport">
       <Header />
       <slot />
-      <Footer/>
+      <Footer class="sticky top-[100vh]"/>
     </div>
   </section>
 </template>
@@ -20,3 +20,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fill-viewport {
+  height: 100vh;
+}
+
+</style>

@@ -11,4 +11,8 @@ module.exports = {
         extend: {},
     },
     plugins: [require("@tailwindcss/typography")],
+    safelist: [
+        'bg-orange-500',
+        'text-orange-500'
+    ]
 };
