@@ -7,8 +7,13 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     'nuxt-simple-sitemap',
-    'nuxt-icon'
+    'nuxt-icon',
+    '@nuxtjs/color-mode'
   ],
+  colorMode: {
+    preference: 'system',
+    classSuffix: ''
+  },
   $meta: [
     { charset: "utf-8" },
     { name: "viewport", content: "width=device-width, initial-scale=1" },

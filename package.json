@@ -16,6 +16,8 @@
   "devDependencies": {
     "@modyfi/vite-plugin-yaml": "^1.0.4",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/color-mode": "^3.3.2",
+    "@nuxtjs/i18n": "^8.0.0-rc.11",
     "@nuxtjs/tailwindcss": "^6.10.1",
     "@tailwindcss/typography": "^0.5.10",
     "@types/prismjs": "^1.26.3",

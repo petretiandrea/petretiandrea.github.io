@@ -1,12 +1,14 @@
 <template>
   <!-- Section 1 -->
-  <section class="w-full px-6 pb-12 antialiased bg-white fill-viewport">
+  <div class="dark:bg-gray-900 bg-white">
+    <section class="w-full px-6 pb-12 antialiased fill-viewport">
     <div class="mx-auto max-w-8xl fill-viewport">
       <Header />
       <slot />
       <Footer class="sticky top-[100vh]"/>
     </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>

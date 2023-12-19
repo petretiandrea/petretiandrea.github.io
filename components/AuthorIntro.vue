@@ -5,7 +5,7 @@
     >
       Ciao!
     </h2>
-    <p class="mt-8 mb-4 dark:bg-gray-800 dark:text-blue-200 text-justify">
+    <p class="mt-8 mb-4 dark:text-white text-justify">
       Sono Andrea Petreti, Software Engineer presso PagoPA S.p.A.
       
       Ho conseguito la laurea triennale in Informatica Applicata presso Urbino, 

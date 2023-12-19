@@ -5,13 +5,13 @@
                 Blog
             </h1>
             <p class="text-lg text-slate-700 dark:text-slate-400">
-                All the latest Tailwind CSS news, straight from the&nbsp;team.
+                Work In Progress
             </p>
         </header>
-        <div class="space-y-16 mx-auto max-w-7xl">
+        <!-- <div class="space-y-16 mx-auto max-w-7xl">
             <blog-item v-for="article in articles" :key="article.title" :title="article.title"
                 :description="article.description" :date="article.date" :slug="article.slug"></blog-item>
-        </div>
+        </div> -->
     </div>
 </template>
 

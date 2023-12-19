@@ -1,7 +1,7 @@
 <template>
-  <nav class="md:max-w-6xl mx-auto sticky top-0 z-50">
+  <nav class="md:max-w-6xl mx-auto sticky top-0 z-50 ">
     <div
-      class="bg-white flex flex-wrap items-center justify-center px-10 md:py-4 py-2 overflow-hidden border-b border-gray-200 font-2xl sm:px-4 md:overflow-visible md:px-2"
+      class="bg-white dark:bg-gray-900 flex flex-wrap items-center justify-center px-10 md:py-4 py-2 overflow-hidden border-b dark:border-gray-700 border-gray-200 font-2xl sm:px-4 md:overflow-visible md:px-2"
     >
       <input class="menu-btn hidden" type="checkbox" id="menu-btn" />
       <label
@@ -16,9 +16,18 @@
           <NuxtLink
             :to="item.path"
             :external="item.external ?? false"
-            class="block md:inline-block px-4 py-3 no-underline text-grey-darkest hover:text-grey-darker font-bold text-lg md:text-2xl"
+            class="block md:inline-block px-4 py-3 no-underline dark:text-white text-grey-darkest hover:text-grey-darker font-bold text-lg md:text-2xl"
             >{{ item.name }}</NuxtLink
           >
+        </li>
+        <li>
+          <button
+            class="block md:inline-block px-4 py-3"
+            @click="setColorTheme($colorMode.preference == 'dark' ? 'light' : 'dark')"
+          >
+            <Icon v-if="$colorMode.preference === 'dark'" name="icon-park-solid:dark-mode" color="white"/>
+            <Icon v-else name="icon-park-solid:dark-mode" color="black"/>
+          </button>
         </li>
       </ul>
     </div>
@@ -35,7 +44,14 @@ export default {
       navLinks: menu,
     };
   },
+  methods: {
+    setColorTheme: (newTheme) => {
+      console.log(newTheme)
+      useColorMode().preference = newTheme
+    }
+  }
 };
+
 </script>
 
 <style>
