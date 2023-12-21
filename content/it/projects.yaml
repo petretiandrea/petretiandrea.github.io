@@ -1,12 +1,24 @@
 works:
+  - title: "Home Assistant Tapo Integration"
+    description: |
+      Integrazione per l'hub domestico home assistant per controllare i dispositivi della gamma Tapo di Tp-Link.
+      L'integrazione è sviluppata in Python ed è basata su una libreria da me realizzata per controllare i dispositivi Tapo. 
+      Molte persone ad oggi usano questa integrazione per controllare i dispositivi raggiungengo 600+ star su github e varie donazioni di supporto.
+    thumbnail: "tapo-integration/thunmbnail.png"
+    github: "https://github.com/petretiandrea/home-assistant-tapo-p100"
+    tags:
+      - home assistant
+      - tapo
+      - tplink
+      - python
+      - iot
+
   - title: "Beaesthetic Agenda"
     description: |
       Applicazione e backend per la gestione di appuntamenti di un centro estetico. Il sistema permette di gestire clienti,
       appuntamenti e carte fedeltà. Inoltre è in grado di inviare notifiche via Sms, Whatsapp e in futuro push notification
       ai clienti per ricordare un appuntamento.
-    thumbnail: "intelliserra/intelliserra.png"
-    image_gallery: ["intelliserra/intelliserra.png", "intelliserra/intelliserra2.png"]
-    github: "http://aaa"
+    thumbnail: "beaesthetic/thumbnail.png"
     tags:
       - microservices
       - domain driven design

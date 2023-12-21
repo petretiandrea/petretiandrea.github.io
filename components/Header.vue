@@ -17,10 +17,22 @@
             :to="item.path"
             :external="item.external ?? false"
             class="block md:inline-block px-4 py-3 no-underline dark:text-white text-grey-darkest hover:text-grey-darker font-bold text-lg md:text-2xl"
-            >{{ item.name }}</NuxtLink
+            >{{ $t(item.name_key) }}</NuxtLink
           >
         </li>
-        <li>
+        <!-- lang switcher -->
+        <!-- <li>
+          <NuxtLink v-if="$i18n.locale !== 'en'" :to="switchLocalePath('en')" 
+          class="block md:inline-block px-4 py-3 no-underline dark:text-white text-grey-darkest hover:text-grey-darker font-bold text-lg md:text-2xl">
+            EN
+          </NuxtLink>
+          <NuxtLink v-if="$i18n.locale !== 'it'" :to="switchLocalePath('it')"
+          class="block md:inline-block px-4 py-3 no-underline dark:text-white text-grey-darkest hover:text-grey-darker font-bold text-lg md:text-2xl">
+            IT
+          </NuxtLink>
+        </li> -->
+        <!-- dark mode toggle -->
+        <!-- <li>
           <button
             class="block md:inline-block px-4 py-3"
             @click="setColorTheme($colorMode.preference == 'dark' ? 'light' : 'dark')"
@@ -28,7 +40,7 @@
             <Icon v-if="$colorMode.preference === 'dark'" name="icon-park-solid:dark-mode" color="white"/>
             <Icon v-else name="icon-park-solid:dark-mode" color="black"/>
           </button>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>

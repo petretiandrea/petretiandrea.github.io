@@ -4,10 +4,10 @@
       <h1
         class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
       >
-        Projects
+        {{$t('project_page_title')}}
       </h1>
       <p class="text-lg leading-7 text-gray-500 dark:text-gray-400">
-        Some of the projects I've build or been a part of.
+        {{ $t('project_page_description') }}
       </p>
     </div>
     <main class="relative mb-auto">
@@ -15,7 +15,7 @@
         <div class="container py-12">
           <div class="flex flex-wrap -m-4">
             <project-card
-              v-for="item in projectsData"
+              v-for="item in projects"
               :key="item.title"
               :title="item.title"
               :description="item.description"
@@ -30,14 +30,13 @@
   </div>
 </template>
 
+<script setup>
+const { locale } = useI18n();
+const {data: projects} = await useAsyncData('projects', () => queryContent(`${locale.value}/projects`).findOne().then(data => data.works));
+</script>
+
 <script>
-import projects from '@/data/projects.yaml'
 export default {
-  data() {
-    return {
-      projectsData: projects.works,
-    };
-  },
   head: {
     title: "Md Solaiman | Projects",
     meta: [

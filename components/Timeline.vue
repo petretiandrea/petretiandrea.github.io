@@ -23,13 +23,16 @@
   </div>
 </template>
 
-<script>
-import experiencesYaml from '@/data/experiences.yaml'
+<script setup>
+const { locale: { value: localCode }} = useI18n();
+const {data: experiences} = await useAsyncData('experiences', async () => {
+  const yaml = await queryContent(`${localCode}/experiences`).findOne();
+  return yaml.experiences.reverse()
+});
+</script>
 
+<script>
 export default {
-  data: () => ({
-    experiences: experiencesYaml.experiences.reverse()
-  }),
   methods: {
     formatFromDate: function (date) {
       return this.capitalize(this.format_date(date))
