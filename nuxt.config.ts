@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode'
   ],
   colorMode: {
-    preference: 'system',
+    preference: 'light', // will be system
     classSuffix: ''
   },
   i18n: {
