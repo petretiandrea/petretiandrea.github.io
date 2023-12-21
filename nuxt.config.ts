@@ -2,6 +2,9 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    baseURL: '/petretiandrea.github.io/'
+  },
   modules: [
     '@nuxtjs/i18n',
     '@nuxt/content',
