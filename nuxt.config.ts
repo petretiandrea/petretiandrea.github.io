@@ -2,9 +2,6 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  app: {
-    baseURL: '/petretiandrea.github.io/'
-  },
   modules: [
     '@nuxtjs/i18n',
     '@nuxt/content',
@@ -17,6 +14,16 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light', // will be system
     classSuffix: ''
+  },
+  $production: {
+    debug: false,
+    dev: false,
+    app: {
+      baseURL: '/'
+    },
+    site: {
+      url: "https://petretiandrea.github.io"
+    }
   },
   i18n: {
     lazy: true,
@@ -44,9 +51,6 @@ export default defineNuxtConfig({
   ],
   css: ["@/assets/css/main.css"],
   components: true,
-  site: {
-    url: 'https://example.com',
-  },
   hooks: {
     "vite:extendConfig": (config) => {
       config.plugins?.push(ViteYaml({
