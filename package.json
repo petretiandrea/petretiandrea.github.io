@@ -24,7 +24,7 @@
     "env-cmd": "^10.1.0",
     "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.7",
-    "nuxt-simple-sitemap": "^4.1.6",
+    "nuxt-simple-sitemap": "^4.4.1",
     "puppeteer": "^21.6.1",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
