@@ -1,0 +1,18 @@
+- id: awards
+  translation: Riconoscimenti
+- id: education
+  translation: Formazione
+- id: experiences
+  translation: Esperienze Lavorative
+- id: information
+  translation: Extra
+- id: interests
+  translation: Interessi
+- id: languages
+  translation: Lingue
+- id: projects
+  translation: Progetti
+- id: skills
+  translation: Skills
+- id: publications
+  translation: Pubblicazioni
