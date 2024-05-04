@@ -3,19 +3,22 @@
     <url>
         <loc>https://petretiandrea.github.io/</loc>
         <xhtml:link rel="alternate" hreflang="it-IT" href="https://petretiandrea.github.io/" />
+        <xhtml:link rel="alternate" hreflang="en-EN" href="https://petretiandrea.github.io/en" />
         <xhtml:link rel="alternate" hreflang="x-default" href="https://petretiandrea.github.io/" />
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/author.jpg</image:loc>
+            <image:loc>https://petretiandrea.github.io/_ipx/_/author2.jpg</image:loc>
         </image:image>
     </url>
     <url>
         <loc>https://petretiandrea.github.io/blog</loc>
         <xhtml:link rel="alternate" hreflang="it-IT" href="https://petretiandrea.github.io/blog" />
+        <xhtml:link rel="alternate" hreflang="en-EN" href="https://petretiandrea.github.io/en/blog" />
         <xhtml:link rel="alternate" hreflang="x-default" href="https://petretiandrea.github.io/blog" />
     </url>
     <url>
         <loc>https://petretiandrea.github.io/projects</loc>
         <xhtml:link rel="alternate" hreflang="it-IT" href="https://petretiandrea.github.io/projects" />
+        <xhtml:link rel="alternate" hreflang="en-EN" href="https://petretiandrea.github.io/en/projects" />
         <xhtml:link rel="alternate" hreflang="x-default" href="https://petretiandrea.github.io/projects" />
         <image:image>
             <image:loc>https://petretiandrea.github.io/_ipx/_/tapo-integration/thunmbnail.png</image:loc>
