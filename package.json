@@ -14,7 +14,7 @@
     "build-github-hugo": "rm -rf ../public/cv/ & env-cmd -e production --use-shell \"cd hugo-cv && hugo -D -d ../public/cv/\""
   },
   "devDependencies": {
-    "@modyfi/vite-plugin-yaml": "^1.0.4",
+    "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@nuxt/devtools": "latest",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/i18n": "^8.0.0-rc.11",
