@@ -34,8 +34,8 @@ jobs:
           working_directory: latex-cv
           root_file: resume_cv.tex
           extra_fonts: |
-            fonts/*.otf
-            fonts/*.ttf
+            ./latex-cv/fonts/*.otf
+            ./latex-cv/fonts/*.ttf
           
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
