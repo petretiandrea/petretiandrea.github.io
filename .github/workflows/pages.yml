@@ -27,20 +27,26 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Generate static CV PDFs
-        run: |
-          chmod +x ./pdf-cv-generator/generate.sh
-          ./pdf-cv-generator/generate.sh 
-
-      - name: Build hugo cv 🔧
-        run: |
-          npm run build-github-hugo
+      - name: Generate Latex PDF 🔧
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: latex-cv
+          root_file: resume_cv.tex
+          extra_fonts: |
+            fonts/*.otf
+            fonts/*.ttf
+          
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF
+          path: resume_cv.pdf
 
       - name: Generate
         run: npm run generate
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          folder: ./.output/public
+      # - name: Deploy 🚀
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     folder: ./.output/public
