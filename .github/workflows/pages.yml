@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: PDF
-          path: resume_cv.pdf
+          path: latex-cv/resume_cv.pdf
 
       - name: Generate
         run: npm run generate
