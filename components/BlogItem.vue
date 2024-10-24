@@ -6,7 +6,7 @@
         <h3
           class="mb-4 text-4xl text-slate-700 tracking-tight font-bold dark:text-slate-200"
         >
-          <NuxtLink :to="{ name: 'blog-slug', params: { slug: postSlug } }">
+          <NuxtLink :to="localePath({ name: 'blog-slug', params: { slug: postSlug } })">
             {{ postTitle }}
           </NuxtLink>
         </h3>
@@ -34,8 +34,8 @@
       </article>
     </div>
   </template>
-  
-  <script>
+
+<script>
   export default {
     props: ["title", "description", "date", "slug"],
     data() {

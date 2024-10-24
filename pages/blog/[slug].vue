@@ -18,7 +18,7 @@
                 </a>
             </div>
         </div>
-        <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm" :src="article.image" />
+        <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article.image" />
 
         <ContentDoc class="prose min-w-full p-10 mx-auto" :document="article" />
     </div>
@@ -41,7 +41,8 @@ export default {
     },
     setup: async () => {
         const { params } = useRoute()
-        const { data: article } = await useAsyncData('article', () => queryContent('/blog', params.slug).findOne());
+        const { data: article } = await useAsyncData('articles', () => queryContent('/blog', params.slug).findOne());
+        
         return {
             article: article
         }

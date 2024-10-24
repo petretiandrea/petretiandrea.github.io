@@ -3,6 +3,7 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
+    'nuxt-content-assets',
     '@nuxtjs/i18n',
     '@nuxt/content',
     '@nuxt/image',
@@ -66,5 +67,11 @@ export default defineNuxtConfig({
   },
   image: {
     dir: 'public/img'
+  },
+  content: {
+    highlight: {
+      // Theme used in all color schemes.
+      theme: 'github-dark-dimmed'
+    }
   }
 })
