@@ -9,35 +9,44 @@ draft: true
 slug: design-distributed-scheduler-1
 ---
 
-Having a distributed scheduler can be useful for orchestration purposes, for example sending a reminder after X minutes or set a workflow timeout (a payment must be completed by Y minutes). Designing a scheduler in a distributed environment is not trivial especially when trying to achieve high availability and scalability.
+Having a distributed scheduler can be useful for orchestration purposes. For instance, it can be used to send a reminder after X minutes or enforce a workflow timeout (e.g., ensuring a payment is completed within Y minutes). However, designing a scheduler in a distributed environment is no trivial task, especially when aiming for high availability and scalability.
 
-::callout{type="info" icon="mdi:information"}
-In this design I want to focus mainly in the challenges to overcome to achieve scalability and high availability. So I will simplify the requirements of the scheduler. For example, it will not handle retries for any failed jobs, nor will it handle the concept of jobs, but it will all be traced back to a message/command that can be executed by arbitrary workers, perhaps the same ones that requested the scheduling of the command itself.
-::
 
-Use cases:
+In this design, I will focus primarily on the challenges of achieving scalability and high availability. To keep things straightforward, I will simplify the scheduler's requirements. For example, it will not handle retries for failed jobs, nor will it deal with job-specific concepts. Instead, the scheduler will operate on an abstract level with messages or commands. These messages or commands can be executed by any worker, potentially even the same worker that requested the scheduling.
+
+
+For this system let's assume the following use cases:
 
 - user can schedule a message to be executed at given time
 - user can cancel a scheduled message
-- user can specify a channel (something similar to a kafka topic) where wants to receive the message
+- user can specify a channel (something similar to a kafka topic) where they want to receive the message
 
-To keep system as simple as possibile will not handle use complex retry mechanism like requeuing at this stage. This feature will be added in future.
+Essentially, the system will function like a delayed queue, where messages are delivered at a specified time. When a message's time is up, the system will publish it to a real queue (e.g., Kafka, RabbitMQ).
 
 ## Big picture architecture
+- multiple instance
+- database
+- no router
+- polling
+- nel secondo articolo approndisco lo sharding e come evitare il polling
 
 ![overall-flow.png](images/overall-flow.png#center "Overall flow")
 
 ![system-design.png](images/system-design.svg#center)
 
+parliamo prima dello scheduler
+The main idea is to create a scheduler service which reads pending messages at given time, submit to queue and then track it's progress, like an offset. Processed message can be also deleted by a secondary process. 
+
+
 ## Database
 
-A robust database schema is crucial element which directly affects the overall performance. Let’s start by splitting read and write load based on system use cases.
+A robust database schema is a crucial element that directly impacts overall system performance. To optimize efficiency, we can start by splitting the read and write loads based on the system’s use cases.
 
-It’s easy to understand that database’s primary load type is “read”. The scheduler will read every X minutes the pending scheduled task to establish which must be executed right now. Also, the system must allow retrieving a scheduled job by its `scheduleId`.
+It’s easy to see that the primary type of load on the database is “read”. The scheduler will periodically (e.g., every X minutes) query the pending scheduled messages to determine which ones need to be submitted immediately.
 
-What’s about write load? From external actor perspective the system allows inserting new schedule job, update/delete existing job. Internally, the scheduler system also needs to remove or update job status when it’s completed/failed.
+What about the write load? From the perspective of external actors, the system supports creating new scheduled messages or deleting existing ones. Internally, the scheduler also needs to update the status of messages once they are completed or have failed.
 
-The key point is to provide an efficient way to retrieve tasks that are currently scheduled to be executed. In this design  I’ll use MongoDB, a NoSQL database which allows us to scale-out and partition data easily. 
+The key challenge is to design an efficient way to retrieve messages that are ready to be submitted. For this design, I’ll use MongoDB, a NoSQL database that enables easy scaling and partitioning of data.
 
 ### Schema design
 
@@ -46,6 +55,7 @@ A database schema for NoSQL like database
 ```json
 {
 	"scheduleId": "...",
+	"destinationTopic": "...",
 	"executionTime": "date-time",
 	"payload": "scheduled command payload",
 	"status": "PENDING|DELIVERED|DELIVERY_FAILED"
@@ -54,29 +64,51 @@ A database schema for NoSQL like database
 
 The schema is pretty simple with few fields:
 
-- `payload`: contains the data of the scheduled job. The payload will be delivered to queue
-- `status`: to track schedule status. `PENDING` is default status, while `DELIVERED` means sent to queue and `DELIVERY_FAILED` when fail to deliver message to queue
-- `executionTime` is a timestamp round up to minute or second, based on scheduler granularity
+- `payload`: Contains the data for the scheduled job. This payload will be delivered to the queue.
+- `status`: Tracks the schedule status. The default status is `PENDING`, while `DELIVERED` means the message has been sent to the `destinationTopic`, and `DELIVERY_FAILED` indicates a failure to deliver the message to the queue.
+- `executionTime`: A timestamp, rounded to the nearest minute or second, based on the scheduler’s granularity.
+- `destinationTopic`: Specifies the topic where the scheduler will publish the message. This could be a Kafka topic or a RabbitMQ routing key.
 
-Example of SQL-like query to retrieve task for next execution time. e.g. current `executionTime = 2024/09/25T12:50:00Z`
+#### Storing Offset and Execution Time
+In addition to the main scheduler collection, the system will have a dedicated collection to store the offset and the last `executionTime`. This will allow the scheduler to track the progress of scheduled messages more effectively.
+The structure of this collection could look like this:
+
+```json
+{
+	"lastExecutionTime": "date-time"
+}
+```
+Where:
+
+- `lastTaskId`: A unique identifier for the task being tracked.
+- `lastExecutionTime`: The last time the task was executed, helping to track the progress and avoid redundant processing.
+
+#### Optimize query
+Example of SQL-like query to retrieve messages for next execution time. e.g. current `executionTime > 2024/09/25T12:50:00Z AND executionTime < 2024/09/25T12:50:00Z`
 
 ```jsx
-SELECT * FROM schedules WHERE executionTime = "2024/09/25T12:50:00Z"
+SELECT * FROM schedules 
+WHERE executionTime > {lastExecutionTime} 
+AND executionTime < "2024/09/25T12:50:01Z" 
+```
+Why use a range query? It makes handling issues related to timestamp precision or small variations in service processing easier, especially in failure scenarios.
+
+Without a proper data partition strategy, this query could result in a full scan of all shards. For example, if using `scheduleId` as the shard key, running this query would span multiple partitions. To optimize the search query, a better shard key would be `executionTime`. This approach allows the query to be answered by exploring a single shard or a reduced number of shards. In MongoDB, this type of shard key is called a Range Shard Key. MongoDB automatically splits the data space into multiple ranges and redirects the request to the most appropriate shard or set of shards. From an abstract point of view, it's as if we are grouping all jobs with the same scheduling date into the same group.
+
+The second operation is the update of message to `DELIVERED` o `DELIVERY_FAILED`. This kind of operation leverage on scheduleId, using `executionTime` as only the shard key, the write operation lead into scatter-gather. So we can create composite shard key, like the following:
+```js
+db.shardCollection("messages", {executionTime: 1, scheduleId: 1})
 ```
 
-In a high scale scenario, without a proper data partition strategy this query led into a scan of all shards. If using `scheduleId` as shard key, running this query spans on multiple partitions. To optimize search query a proper shard key could be the `executionTime` . In this way the query can be answered by “exploring” a single shard. 
-
-In a high scale scenario, without a proper data partition strategy this query led into a scan of all shards. If using `scheduleId` as shard key, running this query spans on multiple partitions. To optimize search query a proper shard key could be the `executionTime` . In this way the query can be answered by “exploring” a single shard. 
-
-From a more abstract point of view, it is as if we are grouping all jobs with same scheduling date into the same group. 
-
-What happens if there are a lot of job scheduled at the same time? It depends on `executionTime` granularity (e.g. round up timestamp to second or minute), but maybe led into a **skewed partition**. We will address to solve this issue later, when discussing about **scheduler-service.**
+### Dealing with Skewed Partitions and Hotspotting
+What happens if many jobs are scheduled at the same time? It depends on the granularity of the executionTime (e.g., rounding the timestamp to the second or minute), but it could lead to **skewed partitions**. Additionally, MongoDB suffers from Monotonic Increasing Keys (such as timestamps), which can lead to **shard hotspotting**. We will address how to resolve this issue in the next section when discussing the **scheduler-service**.
 
 ## Design Scheduler service
 
-Lo scheduler implementa le funzionalità core per stabilire quali sono i task da eseguire secondo la programmazione richiesta dall’utente. So it’s responsible for:
+In this first scheduler design, it's behaviour is pretty simple.
 
-1. polling every minute for task with status `PENDING` 
+1. polling every minute/second for task with status `PENDING` 
+2. check if message is `PENDING`
 2. send a message to queue with payload
 3. update job status based on queue’s publish outcome
 
@@ -90,7 +122,7 @@ sequenceDiagram
 	end
 ```
 
-Obviously polling every minute implies that the system will handle at most granularity per minute. In subsequent designs, I will explore how to implement a system that can handle finer granularity and manage database accesses more efficiently. 
+Obviously the polling frequency implies the scheduler granularity. For now, let's assume a second granularity even this implies a lot of query on database. In subsequent designs, I will explore how to improve the system to avoid too many useless queries (spoiler: using actor-like approach and caching). 
 
 The system seems to be ready to be implemented, but what about horizontal scalability? If I want to run multiple instances of schedulers, we led into a concurrency issue. e.g. two different instances try to poll same jobs and send the same events. Also, there is no load distribution between instances!
 
