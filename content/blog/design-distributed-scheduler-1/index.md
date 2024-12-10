@@ -14,6 +14,7 @@ Having a distributed scheduler can be useful for orchestration purposes. For ins
 
 In this design, I will focus primarily on the challenges of achieving scalability and high availability. To keep things straightforward, I will simplify the scheduler's requirements. For example, it will not handle retries for failed jobs, nor will it deal with job-specific concepts. Instead, the scheduler will operate on an abstract level with messages or commands. These messages or commands can be executed by any worker, potentially even the same worker that requested the scheduling.
 
+## Use cases
 
 For this system let's assume the following use cases:
 
@@ -24,21 +25,15 @@ For this system let's assume the following use cases:
 Essentially, the system will function like a delayed queue, where messages are delivered at a specified time. When a message's time is up, the system will publish it to a real queue (e.g., Kafka, RabbitMQ).
 
 ## Big picture architecture
-- multiple instance
-- database
-- no router
-- polling
-- nel secondo articolo approndisco lo sharding e come evitare il polling
+The main idea is to create a scheduler service which reads pending messages at given time, submit to queue and then track it's progress, like an offset. When a message is successfully delivered to destination topic then the scheduler update the message status (ack/nack).
 
-![overall-flow.png](images/overall-flow.png#center "Overall flow")
+![system-design.png](images/big-picture.svg#center)
 
-![system-design.png](images/system-design.svg#center)
+Event the diagram shows multiple instance of scheduler service, this design start by
+exploring a solution based on single instance Scheduler and then starts by making some re-design
+to make system horizontally scalable.
 
-parliamo prima dello scheduler
-The main idea is to create a scheduler service which reads pending messages at given time, submit to queue and then track it's progress, like an offset. Processed message can be also deleted by a secondary process. 
-
-
-## Database
+### Database
 
 A robust database schema is a crucial element that directly impacts overall system performance. To optimize efficiency, we can start by splitting the read and write loads based on the system’s use cases.
 
@@ -83,7 +78,7 @@ Where:
 - `lastTaskId`: A unique identifier for the task being tracked.
 - `lastExecutionTime`: The last time the task was executed, helping to track the progress and avoid redundant processing.
 
-#### Optimize query
+#### Optimize queries
 Example of SQL-like query to retrieve messages for next execution time. e.g. current `executionTime > 2024/09/25T12:50:00Z AND executionTime < 2024/09/25T12:50:00Z`
 
 ```jsx
@@ -95,22 +90,41 @@ Why use a range query? It makes handling issues related to timestamp precision o
 
 Without a proper data partition strategy, this query could result in a full scan of all shards. For example, if using `scheduleId` as the shard key, running this query would span multiple partitions. To optimize the search query, a better shard key would be `executionTime`. This approach allows the query to be answered by exploring a single shard or a reduced number of shards. In MongoDB, this type of shard key is called a Range Shard Key. MongoDB automatically splits the data space into multiple ranges and redirects the request to the most appropriate shard or set of shards. From an abstract point of view, it's as if we are grouping all jobs with the same scheduling date into the same group.
 
-The second operation is the update of message to `DELIVERED` o `DELIVERY_FAILED`. This kind of operation leverage on scheduleId, using `executionTime` as only the shard key, the write operation lead into scatter-gather. So we can create composite shard key, like the following:
+The second operation involves updating the message status to either `DELIVERED` or `DELIVERY_FAILED`. 
+This operation will use `scheduleId` as the unique identifier. However, if we only use `executionTime` as the shard key, 
+the write operation may lead to a scatter-gather query, which can reduce efficiency.
+To improve performance, we can create a composite shard key by combining two keys. 
+This allows for more efficient updates by directing the operation to a specific shard.
 ```js
 db.shardCollection("messages", {executionTime: 1, scheduleId: 1})
 ```
+With this composite shard key, the MongoDB query planner will target a single shard for each operation, 
+improving the performance and efficiency of writes. The first state in the query planner would be `SINGLE_SHARD`, 
+meaning the query no longer needs to perform a scatter-gather across multiple shards.
 
 ### Dealing with Skewed Partitions and Hotspotting
-What happens if many jobs are scheduled at the same time? It depends on the granularity of the executionTime (e.g., rounding the timestamp to the second or minute), but it could lead to **skewed partitions**. Additionally, MongoDB suffers from Monotonic Increasing Keys (such as timestamps), which can lead to **shard hotspotting**. We will address how to resolve this issue in the next section when discussing the **scheduler-service**.
+What happens if many jobs are scheduled at the same time? 
+It depends on the granularity of the executionTime (e.g., rounding the timestamp to the second or minute), 
+but it could lead to **skewed partitions**. 
+MongoDB also faces issues with Monotonic Increasing Keys, like timestamps, which can cause shard hotspotting. 
+This happens when new data constantly gets routed to the same shard due to a sequence of timestamps being close to each other. 
+Over time, this leads to uneven load distribution and potential performance bottlenecks.
+We will address how to resolve this issue in the next section when discussing the **scheduler-service**.
 
 ## Design Scheduler service
 
-In this first scheduler design, it's behaviour is pretty simple.
+In this first scheduler design, it's behaviour is quite  simple.
 
 1. polling every minute/second for task with status `PENDING` 
 2. check if message is `PENDING`
 2. send a message to queue with payload
 3. update job status based on queue’s publish outcome
+4. checkpoint the offset by updating document.
+
+Optionally: To improve performance and reduce writes to the database, checkpointing can be performed every X seconds.
+The downside of this approach is that the service could crash without writing its last checkpoint. 
+When the service restarts, it will re-read the previous batch of messages, 
+but it won't produce duplicate messages due to the message status field.
 
 ```mermaid
 sequenceDiagram
@@ -122,55 +136,114 @@ sequenceDiagram
 	end
 ```
 
-Obviously the polling frequency implies the scheduler granularity. For now, let's assume a second granularity even this implies a lot of query on database. In subsequent designs, I will explore how to improve the system to avoid too many useless queries (spoiler: using actor-like approach and caching). 
+Obviously, the polling frequency determines the scheduler’s granularity. 
+For now, let's assume second-level granularity, even though this implies a lot of queries to the database. 
+In subsequent designs, I will explore ways to improve the system and reduce unnecessary queries 
+(spoiler: using an actor-like approach and caching).
 
-The system seems to be ready to be implemented, but what about horizontal scalability? If I want to run multiple instances of schedulers, we led into a concurrency issue. e.g. two different instances try to poll same jobs and send the same events. Also, there is no load distribution between instances!
+The system seems ready for implementation, but what about horizontal scalability? 
+If I want to run multiple instances of the scheduler, this could lead to concurrency issues. 
+For example, two different instances might try to poll the same jobs and send the same events. 
+Additionally, there is no load distribution between instances!
 
 ## Re-Design: Make it scalable!
+Let's make a little bit of redesign to address some issues:
+- High load for single worker when there are a lot of scheduled job at same second
+- The scheduler service cannot properly scale horizontally. Increasing instances doesn't distribute the load.
+- The scheduler service is a single point of failure.
 
-We have 3 main problem:
-
-- possibile partition skew when there are a lot of scheduled job at same minute
-- scheduler-service cannot properly scale horizontaly. Increasing instances doesn’t distributed the load
-- scheduler-service is a single point of failure
-
-The idea is to distribute the load at application level. If you have 10 000 jobs scheduled at the same time, we can split it into 10 000 / number of instances. In this way, each service will handle different partition and poll only for its assigned partitions.
+The goal is to distribute the load at the application level. For example, if you have 10,000 jobs scheduled at the same time, we can split them into 10,000 / number of instances. 
+This way, each service will handle a different partition and poll only for its assigned partitions.
 
 ### Database
 
-At database schema level we must introduce a new field: `bucket`. Each bucket can contains multiple jobs scheduled at the same minute. Suppose to define a total number of buckets e.g. 20, this means that multiple job scheduled at the same time can be potentially processed by a max of **20 parallel instances.** 
-
-The max number of buckets its an hyperparameter to be fine tuned based on load expectation, something like to the number of partition for a kafka topic.
+At the database schema level, we need to introduce a new field: `bucket`. 
+Each bucket can contain multiple scheduled messages at the same second. Suppose we define a total number of buckets (e.g. 20), 
+this means that messages scheduled at the same time can potentially be processed by a maximum of **20 parallel instances**.
+So, the number of buckets is a hyperparameter that should be fine-tuned based on load expectations, something
+similar to the number of partitions in a Kafka topic.
 
 So extend the schema in the following way:
 ```json
 { 
 	"scheduleId": "...",
 	"executionTime": "date-time",
-	"bucked": 1,
+	"bucket": 1,
 	"payload": "scheduled command payload",
 	"status": "PENDING|DELIVERED|DELIVERY_FAILED"
 }
 ```
+We can leverage the combination of `executionTime` and `bucket` as a composite shard key to improve and parallelize 
+reads across multiple instances. Messages scheduled at the same time and in the same bucket will be colocated 
+in the same MongoDB partition, which helps reduce partition skew for jobs scheduled at identical times.
 
-Now, `executionTime` and `bucket`  can be joined as a composite shard key! So, jobs scheduled at the same time of the same bucket will be located to the same partition. Also, this will reduce the partition skew for jobs scheduled at the same time.
+However, the MongoDB monotonic timestamp issue still persists. To mitigate this, 
+using `bucket` as the shard key prefix (the first part of the composite key) can help reduce the negative effects 
+of a monotonic timestamp:
+```js
+db.shardCollection("messages", {bucket: "hashed", executionTime: 1, scheduleId: 1})
+```
+Even though `bucket` is a low-cardinality key, its combination with `executionTime` (which is a high-cardinality and monotonic key) 
+and `scheduleId` (also a high-cardinality key) gives MongoDB enough information to effectively split the shards without issues. Additionally, 
+using a "hashed" `bucket` ensures event data distribution across shards, thereby avoiding hotspotting.
+Now the query to retrieve next scheduled messages looks like the following one:
+```jsx
+SELECT * FROM schedules 
+WHERE bucket = {schedulerInstanceAssignedBucket} AND
+WHERE executionTime > {lastExecutionTime} 
+AND executionTime < "2024/09/25T12:50:01Z"
+```
+
 
 ### Scheduler Service
 
-The re-design of scheduler service is not trivial, the idea is to split workload among multiple instances. For example, fixed max of buckets to 20 and 4 scheduler instances, we must split and assign partition to 4 scheduler instance. The first one will handle the first 5 buckets, the second one from the second 5 buckets and so on. What happens when a node fails? Or a new one is scaled-out? The system needs to be rebalanced! Our system is evolved into a stateful service! We need a sort of coordination and cluster aware mechanism.
+The re-design of scheduler service is not trivial, the idea is to split workload among multiple instances. 
+For example, fixed max of buckets to 20 and 4 scheduler instances, each scheduler should work on a specific assigned partitions. 
+The first one will handle the first 5 buckets, the second one from the second 5 buckets and so on. 
 
-::callout{type="info" icon="mdi:information"}
-To implement this kind of solution there is a lot of technology we can use:
+But what happens when a node fails? Or a new one is scaled-out? In such scenarios, the system requires rebalancing
+to ensure an even distribution of workloads. This calls for a coordination mechanism and cluster 
+awareness to dynamically reassign buckets among the available nodes.
 
-- Zookeeper
-- A distributed consensus algorithm like Raft or Paxos
-- Distributed map with Hazelcast
+#### Clustering
+Typically, clusters involve **member discovery** and **failure detection** to update each instance’s local knowledge about the cluster. By knowing the cluster membership and the fixed bucket size, it becomes possible to assign (or self-assign) a set of partitions. Many techniques and technologies enable cluster formation and facilitate information sharing among members to split up partitions. For example:
+- Relying on Leader Election: Using consensus algorithms like Raft or Paxos, a leader is elected to assign partitions.
+- Zookeeper: Provides coordination and partition management.
+- Distributed Maps: High-level abstractions over consensus algorithms, like Hazelcast, that allow shared state and partition assignment.
+
+Another alternative - one I will explore and implement in the next article - is to use a cluster membership protocol combined with consistent hashing (hash ring).
+- The membership protocol is responsible for detecting members in-out and node failures.
+- The hash ring tracks active nodes on a logical ring and enables nodes to self-establish their own partitions. Additionally, the hash ring minimizes the number of partitions re-assignment during a rebalance.
+
+[Consistent Hashing](https://www.toptal.com/big-data/consistent-hashing) is an elegant solution for balancing workloads in distributed systems and will be a core component of the next design.
+
+::callout{type="warning" icon="mdi:warning"}
+During scale-out, scale-in, or node failure, cluster members may temporarily see different member counts, leading to **partition ownership overlap**. To address this, the scheduler will rely on a persistence layer to acquire a **partition lock with fencing**.
+
+These aspects, along with more details about application-level partitioning, hash rings, and membership protocols, will be deeply covered in the second part of "Designing a Distributed Scheduler".
 ::
 
-Now, multiple instance of scheduler can be deployed. Using cluster membership and a leader election mechanism, the leader assign partition to itself and other members. Each member has a defined working set of buckets and can poll for it’s assigned buckets.
+#### Message bucket assignment
+How do we assign a bucket to a message? It's straightforward: by using a hash function or a round-robin policy.
+For a hash-based approach, the assignment can be determined as follows:
+```
+hash(scheduleId) % buckets
+```
+Where `scheduleId` is a unique identifier, such as a UUID. 
+While the hash function should be well-distributed, like MurMur3 (commonly used in Kafka).
+This approach ensures that, given a specific `scheduleId`, the target `bucket` can always be determined consistently. As a result, updating the message status can be optimized, avoiding scatter-gather queries in MongoDB.
 
-The last pain point: how to assign a job to a bucket? 
+The system effectively employs two layers of sharding:
+  1. Scheduler-To-Bucket: Each worker is mapped inside a hash ring and is responsible for its assigned buckets.
+  2. Message-To-Bucket: Each message is assigned to a specific bucket based on the hash function. 
 
-It’s pretty simple: a round robin policy is enough. Another approach could be `hash(executionTime) % buckets`  but this led to assign same bucket for job scheduled at the same! Using a round robin policy you will distribute workload to different buckets. Also, a random policy can be enough, on high scale a random function will distribute workload evenly among buckets.
+![message-partition-assignment](images/message-partition-assignment.svg#center)
 
-## Future works
+
+## What’s Next?
+This article introduced the foundational design for a scalable, distributed scheduler. While we explored key concepts such as bucket-based sharding, partition ownership, and cluster coordination, there’s still more to uncover.
+
+In the next article, I’ll delve deeper into:
+- Cluster membership and Hash Rings: Used to establish partition ownership to self-distribute workloads across nodes.
+- Partition Locking with Fencing Tokens: Approach to prevent ownership overlaps during transient states like scale-in, scale-out, or node failures.
+- Polling: Optimization to reduce every second polling on database.
