@@ -115,7 +115,7 @@ We will address how to resolve this issue in the next section when discussing th
 
 In this first scheduler design, it's behaviour is quite  simple.
 
-1. polling every minute/second for task with status `PENDING` 
+1. polling every minute/second for messages with `scheduledTime` after last offeset 
 2. check if message is `PENDING`
 2. send a message to queue with payload
 3. update job status based on queue’s publish outcome
