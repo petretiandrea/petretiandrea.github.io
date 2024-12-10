@@ -126,15 +126,7 @@ The downside of this approach is that the service could crash without writing it
 When the service restarts, it will re-read the previous batch of messages, 
 but it won't produce duplicate messages due to the message status field.
 
-```mermaid
-sequenceDiagram
-	scheduler ->> DB: poll every minute
-	DB -->> scheduler: pending jobs
-	loop for each jobs
-		scheduler ->> queue: send payload message
-		scheduler ->> DB: update status to COMPLETED
-	end
-```
+![sequence](images/sequence.svg#center){width="600"}
 
 Obviously, the polling frequency determines the scheduler’s granularity. 
 For now, let's assume second-level granularity, even though this implies a lot of queries to the database. 
@@ -237,7 +229,7 @@ The system effectively employs two layers of sharding:
   1. Scheduler-To-Bucket: Each worker is mapped inside a hash ring and is responsible for its assigned buckets.
   2. Message-To-Bucket: Each message is assigned to a specific bucket based on the hash function. 
 
-![message-partition-assignment](images/message-partition-assignment.svg#center)
+![message-partition-assignment](images/message-partition-assignment.svg#center){width="700"}
 
 
 ## What’s Next?
