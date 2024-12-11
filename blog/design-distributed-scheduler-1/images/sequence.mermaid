@@ -1,0 +1,9 @@
+sequenceDiagram
+	scheduler ->> DB: poll every seconds after last offset
+	DB -->> scheduler: pending messages
+	loop for each messages
+        alt is not ACKED
+		    scheduler ->> destination-topic: send payload message
+		    scheduler ->> DB: update message as ACKED
+        end
+	end
