@@ -81,7 +81,10 @@ export default defineNuxtConfig({
   content: {
     markdown: {
       mdc: true,
-      anchorLinks: true
+      anchorLinks: true,
+      toc: {
+        searchDepth: 2
+      }
     },
     highlight: {
       theme: {

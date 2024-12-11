@@ -33,7 +33,7 @@ Event the diagram shows multiple instance of scheduler service, this design star
 exploring a solution based on single instance Scheduler and then starts by making some re-design
 to make system horizontally scalable.
 
-### Database
+## Database
 
 A robust database schema is a crucial element that directly impacts overall system performance. To optimize efficiency, we can start by splitting the read and write loads based on the system’s use cases.
 
@@ -64,7 +64,7 @@ The schema is pretty simple with few fields:
 - `executionTime`: A timestamp, rounded to the nearest minute or second, based on the scheduler’s granularity.
 - `destinationTopic`: Specifies the topic where the scheduler will publish the message. This could be a Kafka topic or a RabbitMQ routing key.
 
-#### Storing Offset and Execution Time
+### Storing Offset and Execution Time
 In addition to the main scheduler collection, the system will have a dedicated collection to store the offset and the last `executionTime`. This will allow the scheduler to track the progress of scheduled messages more effectively.
 The structure of this collection could look like this:
 
@@ -78,7 +78,7 @@ Where:
 - `lastTaskId`: A unique identifier for the task being tracked.
 - `lastExecutionTime`: The last time the task was executed, helping to track the progress and avoid redundant processing.
 
-#### Optimize queries
+### Optimize queries
 Example of SQL-like query to retrieve messages for next execution time. e.g. current `executionTime > 2024/09/25T12:50:00Z AND executionTime < 2024/09/25T12:50:00Z`
 
 ```sql

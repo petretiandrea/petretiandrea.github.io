@@ -1,6 +1,7 @@
 <template>
-    <div class="px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0 mt-10">
-        <p class="text-center font-bold my-5 text-indigo-500">
+  <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
+    <div class="col-span-12 lg:col-span-9">
+      <p class="text-center font-bold my-5 text-indigo-500">
             {{ formatDate(article.date) }}
         </p>
         <h1 class="text-4xl text-gray-700 font-extrabold mb-10 text-center">
@@ -20,30 +21,42 @@
         </div>
         <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article.image" />
 
-        <ContentDoc class="prose min-w-full p-10 mx-auto" :document="article" />
-        <Giscus 
-            id="comments"
-            repo="petretiandrea/petretiandrea.github.io"
-            repoId="MDEwOlJlcG9zaXRvcnkyODQyMjkyOTc="
-            category="Q&A"
-            categoryId="DIC_kwDOEPD-sc4ClIwk"
-            mapping="pathname"
-            strict="1"
-            reactionsEnabled="1"
-            emitMetadata="0"
-            inputPosition="top"
-            theme="light"
-            lang="en"
-            loading="lazy"
-            crossorigin="anonymous"
-            async
-        />
+      <div
+        class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
+      >
+        <ContentDoc :document="article" />
+      </div>
     </div>
+    
+    <BlogToc />
+
+    <div class="col-span-12">
+      <Giscus 
+        id="comments"
+        repo="petretiandrea/petretiandrea.github.io"
+        repoId="MDEwOlJlcG9zaXRvcnkyODQyMjkyOTc="
+        category="Q&A"
+        categoryId="DIC_kwDOEPD-sc4ClIwk"
+        mapping="pathname"
+        strict="1"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="top"
+        theme="light"
+        lang="en"
+        loading="lazy"
+        crossorigin="anonymous"
+        async
+    />
+    </div>
+  </div>
 </template>
+
 
 <script>
 import siteInfo from "@/data/siteinfo";
 import Giscus from "@giscus/vue";
+import Toc from "../../components/Blog/Toc.vue";
 
 export default {
     data() {
@@ -84,7 +97,8 @@ export default {
         };
     },
     components: {
-        Giscus: Giscus
+        Giscus: Giscus,
+        BlocToc: Toc
     }
 };
 </script>
