@@ -2,10 +2,10 @@
   <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
     <div class="col-span-12 lg:col-span-9">
       <p class="text-center font-bold my-5 text-indigo-500">
-            {{ formatDate(article.date) }}
+            {{ formatDate(article?.date) }}
         </p>
         <h1 class="text-4xl text-gray-700 font-extrabold mb-10 text-center">
-            {{ article.title }}
+            {{ article?.title }}
         </h1>
         <div class="flex items-center font-medium mt-6 sm:mx-3 justify-center">
             <nuxt-img :src="siteMetadata.author_image" loading="lazy" alt=""
@@ -19,7 +19,7 @@
                 </a>
             </div>
         </div>
-        <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article.image" />
+        <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article?.image" />
 
       <div
         class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
@@ -67,13 +67,10 @@ export default {
     },
     methods: {
         formatDate(date) {
+            if (!date) return "";
             const options = { year: "numeric", month: "long", day: "numeric" };
             return new Date(date).toLocaleDateString("en", options);
         },
-    },
-    mounted: () => {
-        // const {$Prism} = useNuxtApp();
-        // $Prism.highlightAll(); // Apply highlighting
     },
     setup: async () => {
         const { params } = useRoute()
@@ -84,7 +81,6 @@ export default {
         }
     },
     head() {
-        //console.log(this.article.title);
         return {
             title: this.article.title,
             meta: [

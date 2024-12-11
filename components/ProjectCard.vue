@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     formatTags: (tags) => {
-      console.log(tags)
       return (tags ?? []).join(' • ')
     }
   }

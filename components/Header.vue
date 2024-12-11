@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     setColorTheme: (newTheme) => {
-      console.log(newTheme)
       useColorMode().preference = newTheme
     }
   }

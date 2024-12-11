@@ -13,7 +13,6 @@
           width="300"
           height="150"
           :src="postImage"
-          :alt="alt"
         />
       </div>
       <div class="sm:col-span-7 p-5">
@@ -30,7 +29,6 @@
             {{ formatDate(postDate) }}
           </time>
           <div class="flex items-center gap-1 flex-wrap">
-            <LogoTag />
             <p
               v-for="tag in postTags"
               :key="tag"
