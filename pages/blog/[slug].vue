@@ -21,11 +21,29 @@
         <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article.image" />
 
         <ContentDoc class="prose min-w-full p-10 mx-auto" :document="article" />
+        <Giscus 
+            id="comments"
+            repo="petretiandrea/petretiandrea.github.io"
+            repoId="MDEwOlJlcG9zaXRvcnkyODQyMjkyOTc="
+            category="Q&A"
+            categoryId="DIC_kwDOEPD-sc4ClIwk"
+            mapping="pathname"
+            strict="1"
+            reactionsEnabled="1"
+            emitMetadata="0"
+            inputPosition="top"
+            theme="light"
+            lang="en"
+            loading="lazy"
+            crossorigin="anonymous"
+            async
+        />
     </div>
 </template>
 
 <script>
 import siteInfo from "@/data/siteinfo";
+import Giscus from "@giscus/vue";
 
 export default {
     data() {
@@ -65,6 +83,9 @@ export default {
             ],
         };
     },
+    components: {
+        Giscus: Giscus
+    }
 };
 </script>
 <style>

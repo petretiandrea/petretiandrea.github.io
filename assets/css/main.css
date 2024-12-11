@@ -17,3 +17,8 @@ img[src*='#right'] {
   display: block;
   margin: auto;
 }
+
+.comments-container {
+  max-height: 640px;
+  overflow-y: scroll;
+}

@@ -11,9 +11,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-simple-sitemap',
     'nuxt-icon',
-    '@nuxtjs/color-mode',
+    '@nuxtjs/color-mode'
   ],
-
+  
   colorMode: {
     preference: 'light', // will be system
     classSuffix: ''
