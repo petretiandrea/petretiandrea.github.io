@@ -1,5 +1,6 @@
 <script setup>
-    const { params } = useRoute()
+    const { params } = useRoute();
+    const { data: article } = await useAsyncData('articles', () => queryContent('/blog', params.slug).findOne());
 </script>
 
 <template>
@@ -42,7 +43,7 @@
         category="Q&A"
         categoryId="DIC_kwDOEPD-sc4ClIwk"
         mapping="specific"
-        :term="params"
+        :term="params.slug"
         strict="1"
         reactionsEnabled="1"
         emitMetadata="0"
@@ -77,22 +78,14 @@ export default {
             return new Date(date).toLocaleDateString("en", options);
         },
     },
-    setup: async () => {
-        const { params } = useRoute()
-        const { data: article } = await useAsyncData('articles', () => queryContent('/blog', params.slug).findOne());
-        
-        return {
-            article: article
-        }
-    },
     head() {
         return {
-            title: this.article.title,
+            title: article.title,
             meta: [
                 {
                     hid: "description",
                     name: "description",
-                    content: this.article.description,
+                    content: article.description,
                 },
             ],
         };
