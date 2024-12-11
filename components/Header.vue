@@ -1,3 +1,7 @@
+<script setup>
+  const switchLocalePath = useSwitchLocalePath();
+</script>
+
 <template>
   <nav class="md:max-w-6xl mx-auto sticky top-0 z-50 ">
     <div
@@ -65,8 +69,8 @@ export default {
     }
   }
 };
-
 </script>
+
 
 <style>
 .nuxt-link-exact-active {

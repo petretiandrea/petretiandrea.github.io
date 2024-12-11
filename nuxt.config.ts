@@ -49,7 +49,6 @@ export default defineNuxtConfig({
     ],
     strategy: "prefix_except_default",
     defaultLocale: 'it',
-    vueI18n: './i18n.config.ts',
   },
 
   $meta: [
@@ -67,7 +66,7 @@ export default defineNuxtConfig({
   hooks: {
     "vite:extendConfig": (config) => {
       config.plugins?.push(ViteYaml({
-        exclude: 'locales/**'
+        exclude: 'i18n/locales/**'
       }));
     },
   },
@@ -76,7 +75,7 @@ export default defineNuxtConfig({
     dir: 'public/img',
   },
   contentAssets: {
-    contentExtensions: ".md .svg .webp",
+    contentExtensions: ".md .svg .webp yaml",
     debug: true
   },
   content: {
