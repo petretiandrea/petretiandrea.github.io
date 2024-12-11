@@ -74,6 +74,13 @@ export default defineNuxtConfig({
   image: {
     dir: 'public/img',
   },
+
+  nitro: {
+    prerender: {
+      failOnError: false
+    }
+  },
+
   contentAssets: {
     contentExtensions: ".md .svg .webp yaml",
     debug: true

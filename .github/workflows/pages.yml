@@ -27,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      - name: Gemerate
+        run: npm run generate
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
