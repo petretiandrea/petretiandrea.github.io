@@ -5,7 +5,7 @@ date: 2024-12-11
 description: This article explores the design of a distributed scheduler optimized for scalability and fault tolerance. It covers key challenges like partitioning tasks, managing concurrency, and ensuring load distribution across multiple instances.
 image: images/thumbnail.webp
 author: Andrea Petreti
-draft: true
+draft: false
 slug: design-distributed-scheduler-1
 ---
 
