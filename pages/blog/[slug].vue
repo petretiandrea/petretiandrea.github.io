@@ -1,3 +1,7 @@
+<script setup>
+    const { params } = useRoute()
+</script>
+
 <template>
   <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
     <div class="col-span-12 lg:col-span-9">
@@ -37,7 +41,8 @@
         repoId="MDEwOlJlcG9zaXRvcnkyODQyMjkyOTc="
         category="Q&A"
         categoryId="DIC_kwDOEPD-sc4ClIwk"
-        mapping="pathname"
+        mapping="specific"
+        :term="params.slug"
         strict="1"
         reactionsEnabled="1"
         emitMetadata="0"
