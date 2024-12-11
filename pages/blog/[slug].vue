@@ -23,7 +23,7 @@
                 </a>
             </div>
         </div>
-        <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article?.image" />
+        <img class="mx-auto w-4/5 my-10 rounded-md drop-shadow-sm max-h-80 object-cover" :src="article.image" />
 
       <div
         class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
@@ -42,7 +42,7 @@
         category="Q&A"
         categoryId="DIC_kwDOEPD-sc4ClIwk"
         mapping="specific"
-        :term="params.slug"
+        :term="params"
         strict="1"
         reactionsEnabled="1"
         emitMetadata="0"
