@@ -12,7 +12,8 @@ img[src*='#left'] {
 img[src*='#right'] {
   float: right;
 }
-img[src*='#center'] {
+
+.center-md-image {
   display: block;
   margin: auto;
 }

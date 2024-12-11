@@ -27,7 +27,7 @@ Essentially, the system will function like a delayed queue, where messages are d
 ## Big picture architecture
 The main idea is to create a scheduler service which reads pending messages at given time, submit to queue and then track it's progress, like an offset. When a message is successfully delivered to destination topic then the scheduler update the message status (ack/nack).
 
-![system-design.png](images/big-picture.svg#center)
+<img src="images/big-picture.webp" alt="big-picture" class="center-md-image" width="500"/>
 
 Event the diagram shows multiple instance of scheduler service, this design start by
 exploring a solution based on single instance Scheduler and then starts by making some re-design
@@ -81,7 +81,7 @@ Where:
 #### Optimize queries
 Example of SQL-like query to retrieve messages for next execution time. e.g. current `executionTime > 2024/09/25T12:50:00Z AND executionTime < 2024/09/25T12:50:00Z`
 
-```jsx
+```sql
 SELECT * FROM schedules 
 WHERE executionTime > {lastExecutionTime} 
 AND executionTime < "2024/09/25T12:50:01Z" 
@@ -126,7 +126,7 @@ The downside of this approach is that the service could crash without writing it
 When the service restarts, it will re-read the previous batch of messages, 
 but it won't produce duplicate messages due to the message status field.
 
-![sequence](images/sequence.svg#center){width="600"}
+<img src="images/sequence.svg" alt="sequence" class="center-md-image" width="600"/>
 
 Obviously, the polling frequency determines the scheduler’s granularity. 
 For now, let's assume second-level granularity, even though this implies a lot of queries to the database. 
@@ -179,7 +179,7 @@ Even though `bucket` is a low-cardinality key, its combination with `executionTi
 and `scheduleId` (also a high-cardinality key) gives MongoDB enough information to effectively split the shards without issues. Additionally, 
 using a "hashed" `bucket` ensures event data distribution across shards, thereby avoiding hotspotting.
 Now the query to retrieve next scheduled messages looks like the following one:
-```jsx
+```sql
 SELECT * FROM schedules 
 WHERE bucket = {schedulerInstanceAssignedBucket} AND
 WHERE executionTime > {lastExecutionTime} 
@@ -218,18 +218,18 @@ These aspects, along with more details about application-level partitioning, has
 #### Message bucket assignment
 How do we assign a bucket to a message? It's straightforward: by using a hash function or a round-robin policy.
 For a hash-based approach, the assignment can be determined as follows:
-```
+```js
 hash(scheduleId) % buckets
 ```
-Where `scheduleId` is a unique identifier, such as a UUID. 
+Where scheduleId is a unique identifier, such as a UUID. 
 While the hash function should be well-distributed, like MurMur3 (commonly used in Kafka).
 This approach ensures that, given a specific `scheduleId`, the target `bucket` can always be determined consistently. As a result, updating the message status can be optimized, avoiding scatter-gather queries in MongoDB.
 
 The system effectively employs two layers of sharding:
-  1. Scheduler-To-Bucket: Each worker is mapped inside a hash ring and is responsible for its assigned buckets.
-  2. Message-To-Bucket: Each message is assigned to a specific bucket based on the hash function. 
+  1. **Scheduler-To-Bucket**: Each worker is mapped inside a hash ring and is responsible for its assigned buckets.
+  2. **Message-To-Bucket**: Each message is assigned to a specific bucket based on the hash function. 
 
-![message-partition-assignment](images/message-partition-assignment.svg#center){width="700"}
+<img src="images/message-partition-assignment.svg" alt="message-partition-assignment" class="center-md-image" width="700"/>
 
 
 ## What’s Next?

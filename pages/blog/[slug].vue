@@ -26,6 +26,7 @@
 
 <script>
 import siteInfo from "@/data/siteinfo";
+
 export default {
     data() {
         return {
@@ -39,6 +40,10 @@ export default {
             return new Date(date).toLocaleDateString("en", options);
         },
     },
+    mounted: () => {
+        // const {$Prism} = useNuxtApp();
+        // $Prism.highlightAll(); // Apply highlighting
+    },
     setup: async () => {
         const { params } = useRoute()
         const { data: article } = await useAsyncData('articles', () => queryContent('/blog', params.slug).findOne());
@@ -46,10 +51,6 @@ export default {
         return {
             article: article
         }
-    },
-    mounted() {
-        const { $Prism } = useNuxtApp();
-        //$Prism.highlightAll();
     },
     head() {
         //console.log(this.article.title);

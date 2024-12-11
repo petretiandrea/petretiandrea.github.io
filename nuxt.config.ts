@@ -2,6 +2,7 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
     'nuxt-content-assets',
     '@nuxtjs/i18n',
@@ -10,12 +11,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-simple-sitemap',
     'nuxt-icon',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
   ],
+
   colorMode: {
     preference: 'light', // will be system
     classSuffix: ''
   },
+
   $production: {
     debug: false,
     dev: false,
@@ -26,6 +29,7 @@ export default defineNuxtConfig({
       url: "https://petretiandrea.github.io"
     }
   },
+
   i18n: {
     lazy: true,
     langDir: 'locales',
@@ -47,14 +51,16 @@ export default defineNuxtConfig({
     defaultLocale: 'it',
     vueI18n: './i18n.config.ts',
   },
+
   $meta: [
     { charset: "utf-8" },
     { name: "viewport", content: "width=device-width, initial-scale=1" },
     { hid: "description", name: "description", content: "" },
     { name: "format-detection", content: "telephone=no" },
   ],
+
   plugins: [
-    {src: '~/plugins/prism', mode: 'client'}
+    //{src: '~/plugins/prism', mode: 'client'}
   ],
   css: ["@/assets/css/main.css"],
   components: true,
@@ -65,13 +71,28 @@ export default defineNuxtConfig({
       }));
     },
   },
+
   image: {
-    dir: 'public/img'
+    dir: 'public/img',
+  },
+  contentAssets: {
+    contentExtensions: ".md .svg .webp",
+    debug: true
   },
   content: {
+    markdown: {
+      mdc: true,
+      anchorLinks: true
+    },
     highlight: {
-      // Theme used in all color schemes.
-      theme: 'github-dark-dimmed'
+      theme: {
+        default: "github-dark-dimmed",
+      },
+      preload: ["json", "sql", "js"]
     }
-  }
+  },
+  extends: [
+    'node_modules/nuxt-content-assets/cache',
+  ],
+  compatibilityDate: '2024-12-11'
 })
