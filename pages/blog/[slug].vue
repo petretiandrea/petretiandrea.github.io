@@ -56,7 +56,7 @@
 <script>
 import siteInfo from "@/data/siteinfo";
 import Giscus from "@giscus/vue";
-import Toc from "../../components/Blog/Toc.vue";
+import Toc from "../../components/blog/Toc.vue";
 
 export default {
     data() {
