@@ -2,7 +2,9 @@ import ViteYaml from '@modyfi/vite-plugin-yaml';
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
+    'nuxt-content-assets',
     '@nuxtjs/i18n',
     '@nuxt/content',
     '@nuxt/image',
@@ -11,10 +13,12 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxtjs/color-mode'
   ],
+  
   colorMode: {
     preference: 'light', // will be system
     classSuffix: ''
   },
+
   $production: {
     debug: false,
     dev: false,
@@ -25,6 +29,7 @@ export default defineNuxtConfig({
       url: "https://petretiandrea.github.io"
     }
   },
+
   i18n: {
     lazy: true,
     langDir: 'locales',
@@ -44,27 +49,52 @@ export default defineNuxtConfig({
     ],
     strategy: "prefix_except_default",
     defaultLocale: 'it',
-    vueI18n: './i18n.config.ts',
   },
+
   $meta: [
     { charset: "utf-8" },
     { name: "viewport", content: "width=device-width, initial-scale=1" },
     { hid: "description", name: "description", content: "" },
     { name: "format-detection", content: "telephone=no" },
   ],
+
   plugins: [
-    {src: '~/plugins/prism', mode: 'client'}
+    //{src: '~/plugins/prism', mode: 'client'}
   ],
   css: ["@/assets/css/main.css"],
   components: true,
   hooks: {
     "vite:extendConfig": (config) => {
       config.plugins?.push(ViteYaml({
-        exclude: 'locales/**'
+        exclude: 'i18n/locales/**'
       }));
     },
   },
+
   image: {
-    dir: 'public/img'
-  }
+    dir: 'public/img',
+  },
+  contentAssets: {
+    contentExtensions: ".md .svg .webp yaml",
+    debug: true
+  },
+  content: {
+    markdown: {
+      mdc: true,
+      anchorLinks: true,
+      toc: {
+        searchDepth: 2
+      }
+    },
+    highlight: {
+      theme: {
+        default: "github-dark-dimmed",
+      },
+      preload: ["json", "sql", "js"]
+    }
+  },
+  extends: [
+    'node_modules/nuxt-content-assets/cache',
+  ],
+  compatibilityDate: '2024-12-11'
 })

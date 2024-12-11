@@ -5,3 +5,20 @@
 .nuxt-link-exact-active {
   @apply text-blue-500;
 }
+
+img[src*='#left'] {
+  float: left;
+}
+img[src*='#right'] {
+  float: right;
+}
+
+.center-md-image {
+  display: block;
+  margin: auto;
+}
+
+.comments-container {
+  max-height: 640px;
+  overflow-y: scroll;
+}
