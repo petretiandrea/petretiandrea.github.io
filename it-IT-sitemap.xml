@@ -51,9 +51,6 @@
             <image:loc>https://petretiandrea.github.io/_ipx/_/author2.jpg</image:loc>
         </image:image>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/blog/design-distributed-scheduler-1/images/thumbnail.webp</image:loc>
-        </image:image>
-        <image:image>
             <image:loc>https://petretiandrea.github.io/_ipx/w_500/blog/design-distributed-scheduler-1/images/big-picture.webp</image:loc>
         </image:image>
         <image:image>
@@ -67,9 +64,6 @@
         <loc>https://petretiandrea.github.io/blog/hello</loc>
         <image:image>
             <image:loc>https://petretiandrea.github.io/_ipx/_/author2.jpg</image:loc>
-        </image:image>
-        <image:image>
-            <image:loc>https://petretiandrea.github.io/blog/hello/images/thumbnail.jpg</image:loc>
         </image:image>
     </url>
 </urlset>
