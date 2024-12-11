@@ -1,7 +1,7 @@
 ---
 title: Design Distributed Scheduler - I
-tags: shard, partitions, distributed, scheduler, design, system architecture,
-date: 2024-09-26
+tags: [shard, partitions, scheduler, design, system architecture]
+date: 2024-12-11
 description: This article explores the design of a distributed scheduler optimized for scalability and fault tolerance. It covers key challenges like partitioning tasks, managing concurrency, and ensuring load distribution across multiple instances.
 image: images/thumbnail.webp
 author: Andrea Petreti

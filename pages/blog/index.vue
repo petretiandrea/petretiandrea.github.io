@@ -6,8 +6,14 @@
             </h1>
         </header>
         <div class="space-y-16 mx-auto max-w-7xl">
-            <blog-item v-for="article in articles" :key="article.title" :title="article.title"
-                :description="article.description" :date="article.date" :slug="article.slug"></blog-item>
+            <blog-item v-for="article in articles" :key="article.title" 
+                :title="article.title"
+                :description="article.description" 
+                :date="article.date" 
+                :slug="article.slug"
+                :image="article.image"
+                :tags="article.tags"
+            ></blog-item>
         </div>
     </div>
 </template>
@@ -17,20 +23,21 @@ const { data: articles } = await useAsyncData('articles', () => queryContent('/b
     .only([
         "title",
         "description",
-        "img",
+        "image",
         "slug",
-        "tag",
+        "tags",
         "author",
         "date",
         "draft",
     ])
+    .where({ draft: false })
     .sort({ date: -1 })
     .find()
 );
 </script>
 
 <script>
-import BlogItem from "../../components/BlogItem.vue";
+import BlogItem from "../../components/blog/BlogCardItem.vue";
 
 export default {
     components: [

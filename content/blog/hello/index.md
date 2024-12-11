@@ -1,9 +1,10 @@
 ---
 title: Hello!
-tags: start
-date: 2019-09-29
+tags: [start]
+date: 2024-12-11
 author: Andrea Petreti
 draft: false
+image: images/thumbnail.jpg
 slug: hello
 ---
 
@@ -14,4 +15,4 @@ This blog will serve two purposes: first, as a personal agenda to keep track of 
 
 The focus here will be on architectural design, with a particular emphasis on systems that are both highly scalable and resilient.
 
-With experience in Quarkus, Spring Boot, Node.js, and a growing interest in Go, most of the solutions I’ll share will be based on these technologies. 
+With experience in Quarkus, Spring Boot, Node.js, and a growing interest in Go and Rust, most of the solutions I’ll share will be based on these technologies. 

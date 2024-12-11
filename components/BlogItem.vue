@@ -48,6 +48,7 @@
         postDescription: this.description,
         postSlug: this.slug,
         postDate: this.date,
+        postTags: this.tags
       };
     },
     methods: {
