@@ -86,6 +86,8 @@ export default defineNuxtConfig({
     debug: true
   },
   content: {
+    defaultLocale: 'en',
+    locales: ['en'],
     markdown: {
       mdc: true,
       anchorLinks: true,

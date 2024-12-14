@@ -1,6 +1,6 @@
 <script setup>
-    const { path } = useRoute()
-    const articles = await queryContent(path).findOne()
+    const { params } = useRoute();
+    const articles = await queryContent('/blog', params.slug).findOne()
 
     const links = articles?.body?.toc?.links || []
 </script>

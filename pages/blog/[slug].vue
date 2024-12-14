@@ -1,6 +1,9 @@
 <script setup>
-    const { params } = useRoute();
-    const { data: article } = await useAsyncData('articles', () => queryContent('/blog', params.slug).findOne());
+    const { params, path } = useRoute();
+    const { data: article } = await useAsyncData(
+        'articles', 
+        () => queryContent('/blog', params.slug).findOne()
+    );
 </script>
 
 <template>
@@ -29,7 +32,7 @@
       <div
         class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
       >
-        <ContentDoc :document="article" />
+        <ContentRendererMarkdown :value="article"/>
       </div>
     </div>
     
