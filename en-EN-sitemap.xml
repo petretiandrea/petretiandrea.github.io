@@ -26,23 +26,32 @@
         <xhtml:link rel="alternate" hreflang="it-IT" href="https://petretiandrea.github.io/projects" />
         <xhtml:link rel="alternate" hreflang="en-EN" href="https://petretiandrea.github.io/en/projects" />
         <xhtml:link rel="alternate" hreflang="x-default" href="https://petretiandrea.github.io/projects" />
+    </url>
+    <url>
+        <loc>https://petretiandrea.github.io/en/blog/design-distributed-scheduler-1</loc>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/tapo-integration/thunmbnail.png</image:loc>
+            <image:loc>https://petretiandrea.github.io/_ipx/_/author2.jpg</image:loc>
         </image:image>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/beaesthetic/thumbnail.png</image:loc>
+            <image:loc>https://petretiandrea.github.io/blog/design-distributed-scheduler-1/images/thumbnail.webp</image:loc>
         </image:image>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/intelliserra/intelliserra.png</image:loc>
+            <image:loc>https://petretiandrea.github.io/_ipx/w_500/blog/design-distributed-scheduler-1/images/big-picture.webp</image:loc>
         </image:image>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/scanbage/thubnail.png</image:loc>
+            <image:loc>https://petretiandrea.github.io/_ipx/w_600/blog/design-distributed-scheduler-1/images/sequence.svg</image:loc>
         </image:image>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/fluvium/thubnail.png</image:loc>
+            <image:loc>https://petretiandrea.github.io/_ipx/w_700/blog/design-distributed-scheduler-1/images/message-partition-assignment.svg</image:loc>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://petretiandrea.github.io/en/blog/hello</loc>
+        <image:image>
+            <image:loc>https://petretiandrea.github.io/_ipx/_/author2.jpg</image:loc>
         </image:image>
         <image:image>
-            <image:loc>https://petretiandrea.github.io/_ipx/_/subspedia/thubnail.png</image:loc>
+            <image:loc>https://petretiandrea.github.io/blog/hello/images/thumbnail.jpg</image:loc>
         </image:image>
     </url>
 </urlset>
