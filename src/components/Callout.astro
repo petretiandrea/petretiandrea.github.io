@@ -1,0 +1,68 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'danger' | 'info';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const styles = {
+  note: {
+    container: 'bg-blue-50 dark:bg-blue-950/30 border-blue-500',
+    icon: '📘',
+    title: 'Note',
+    iconColor: 'text-blue-500'
+  },
+  tip: {
+    container: 'bg-green-50 dark:bg-green-950/30 border-green-500',
+    icon: '💡',
+    title: 'Tip',
+    iconColor: 'text-green-500'
+  },
+  warning: {
+    container: 'bg-yellow-50 dark:bg-yellow-950/30 border-yellow-500',
+    icon: '⚠️',
+    title: 'Warning',
+    iconColor: 'text-yellow-500'
+  },
+  danger: {
+    container: 'bg-red-50 dark:bg-red-950/30 border-red-500',
+    icon: '🚨',
+    title: 'Danger',
+    iconColor: 'text-red-500'
+  },
+  info: {
+    container: 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-500',
+    icon: 'ℹ️',
+    title: 'Info',
+    iconColor: 'text-indigo-500'
+  }
+};
+
+const style = styles[type];
+const displayTitle = title || style.title;
+---
+
+<div class={`callout border-l-4 rounded-r-lg p-4 my-6 ${style.container}`}>
+  <div class="flex items-start gap-3">
+    <span class="text-2xl flex-shrink-0">{style.icon}</span>
+    <div class="flex-1">
+      <div class={`font-semibold mb-1 ${style.iconColor}`}>
+        {displayTitle}
+      </div>
+      <div class="text-gray-700 dark:text-gray-300 text-sm">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .callout :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .callout :global(p:first-child) {
+    margin-top: 0;
+  }
+</style>

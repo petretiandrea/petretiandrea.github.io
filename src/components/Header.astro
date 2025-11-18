@@ -1,0 +1,69 @@
+---
+import { menu } from '../config/menu';
+import { getLangFromUrl, useTranslations } from '../i18n/locales';
+import { Icon } from 'astro-icon/components';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Build alternate language link
+const currentPath = Astro.url.pathname;
+const altLang = lang === 'it' ? 'en' : 'it';
+
+// For blog posts, redirect to blog index instead of non-existent translated post
+const isBlogPost = currentPath.startsWith('/blog/') && currentPath !== '/blog' && currentPath !== '/blog/';
+const isBlogPage = currentPath.startsWith('/blog') || currentPath.startsWith('/en/blog');
+let altLangPath;
+
+if (isBlogPost) {
+  // Blog posts are only in Italian, redirect to blog index
+  altLangPath = lang === 'it' ? '/en/blog' : '/blog';
+} else {
+  // Regular pages can be translated
+  altLangPath = lang === 'it'
+    ? `/en${currentPath}`
+    : currentPath.replace(/^\/en/, '') || '/';
+}
+---
+
+<nav class="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b dark:border-gray-700 border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Menu items -->
+      <div class="flex items-center space-x-1">
+        {menu.map((item) => {
+          const itemPath = lang === 'it' ? item.path : `/en${item.path}`;
+          const isActive = Astro.url.pathname === itemPath ||
+                          (item.path !== '/' && Astro.url.pathname.startsWith(itemPath));
+          return (
+            <a
+              href={itemPath}
+              class:list={[
+                'px-4 py-2 rounded-md text-base font-semibold transition-colors duration-200',
+                'hover:bg-gray-100 dark:hover:bg-gray-800',
+                isActive
+                  ? 'text-indigo-600 dark:text-indigo-400 bg-gray-50 dark:bg-gray-800'
+                  : 'text-gray-700 dark:text-gray-200'
+              ]}
+            >
+              {t(item.name_key as any)}
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- Language switcher (hidden on blog pages since blog is Italian only) -->
+      {!isBlogPage && (
+        <div class="flex items-center">
+          <a
+            href={altLangPath}
+            class="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+            title={altLang === 'en' ? 'English' : 'Italiano'}
+          >
+            <Icon name={altLang === 'en' ? 'circle-flags:gb' : 'circle-flags:it'} class="w-6 h-6" />
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+</nav>

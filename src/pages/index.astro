@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AuthorCard from '../components/AuthorCard.astro';
+import AuthorIntro from '../components/AuthorIntro.astro';
+import Timeline from '../components/Timeline.astro';
+import { siteInfo } from '../config/siteInfo';
+import { experiencesIt } from '../data/experiences';
+import { getLangFromUrl } from '../i18n/locales';
+
+const lang = getLangFromUrl(Astro.url);
+const experiences = lang === 'it' ? experiencesIt : experiencesIt;
+---
+
+<Layout title={siteInfo.title} description={siteInfo.description}>
+  <div class="dark:bg-gray-900 mt-6">
+    <div class="max-w-screen-lg md:flex mx-auto dark:bg-gray-900">
+      <div class="md:w-1/3 p-2 md:flex md:justify-center">
+        <AuthorCard />
+      </div>
+      <div class="md:w-2/3 px-8">
+        <AuthorIntro />
+        <Timeline experiences={experiences} />
+      </div>
+    </div>
+  </div>
+</Layout>

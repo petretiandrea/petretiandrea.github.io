@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/locales';
+import { projectsIt } from '../data/projects';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('project_page_title')} description={t('project_page_description')}>
+  <div class="max-w-6xl px-4 mx-auto sm:px-6 xl:px-0">
+    <div class="pt-6 pb-8 space-y-2 md:space-y-5">
+      <h1 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+        {t('project_page_title')}
+      </h1>
+      <p class="text-lg leading-7 text-gray-500 dark:text-gray-400">
+        {t('project_page_description')}
+      </p>
+    </div>
+
+    <main class="relative mb-auto">
+      <div class="container py-12">
+        <div class="flex flex-wrap -m-4">
+          {projectsIt.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

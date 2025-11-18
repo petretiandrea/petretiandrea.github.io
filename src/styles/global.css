@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.center-md-image {
+  display: block;
+  margin: auto;
+}
+
+.comments-container {
+  max-height: 640px;
+  overflow-y: scroll;
+}
+
+img[src*='#left'] {
+  float: left;
+}
+
+img[src*='#right'] {
+  float: right;
+}
+
+/* Callout styles */
+.callout {
+  @apply border-l-4 rounded-r-lg p-4 my-6;
+}
+
+.callout-note {
+  @apply bg-blue-50 dark:bg-blue-950/30 border-blue-500;
+}
+
+.callout-tip {
+  @apply bg-green-50 dark:bg-green-950/30 border-green-500;
+}
+
+.callout-warning {
+  @apply bg-yellow-50 dark:bg-yellow-950/30 border-yellow-500;
+}
+
+.callout-danger {
+  @apply bg-red-50 dark:bg-red-950/30 border-red-500;
+}
+
+.callout-info {
+  @apply bg-indigo-50 dark:bg-indigo-950/30 border-indigo-500;
+}
+
+.callout::before {
+  content: attr(data-callout);
+  @apply block font-semibold mb-2 capitalize;
+}
+
+.callout-note::before {
+  content: "📘 " attr(data-callout);
+  @apply text-blue-500;
+}
+
+.callout-tip::before {
+  content: "💡 " attr(data-callout);
+  @apply text-green-500;
+}
+
+.callout-warning::before {
+  content: "⚠️ " attr(data-callout);
+  @apply text-yellow-500;
+}
+
+.callout-danger::before {
+  content: "🚨 " attr(data-callout);
+  @apply text-red-500;
+}
+
+.callout-info::before {
+  content: "ℹ️ " attr(data-callout);
+  @apply text-indigo-500;
+}
+
+.callout p:last-child {
+  @apply mb-0;
+}
+
+.callout p:first-child {
+  @apply mt-0;
+}

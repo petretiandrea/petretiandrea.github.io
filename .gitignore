@@ -1,3 +1,28 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
 # Created by https://www.toptal.com/developers/gitignore/api/nuxtjs,vuejs,vue,visualstudiocode,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=nuxtjs,vuejs,vue,visualstudiocode,node
 
@@ -206,3 +231,6 @@ hugo-cv/public/
 hugo-cv/resources/_gen/
 hugo-cv/hugo_stats.json
 hugo-cv/static/assets/cvs/
+node_modules
+
+CLAUDE.md

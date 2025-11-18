@@ -1,79 +1,66 @@
-# Nuxt 3 Minimal Starter
-https://github.com/mdrathik/nuxtjs-tailwind-blog
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# Andrea Petreti | Personal Blog & Portfolio
 
-## Setup
+Personal website built with **Astro** and **React**, featuring a blog, portfolio, and CV.
 
-Make sure to install the dependencies:
+Migrated from Nuxt 3 to Astro for better performance and static-first architecture.
 
-```bash
-# npm
-npm install
+## 🚀 Project Structure
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+```text
+astro-site/
+├── public/              # Static assets
+│   ├── img/            # Images
+│   └── cv/             # Hugo-generated CV
+├── src/
+│   ├── components/     # Astro & React components
+│   ├── config/         # Site metadata & menu
+│   ├── content/        # Blog posts (Content Collections)
+│   │   ├── blog/
+│   │   └── config.ts
+│   ├── i18n/           # i18n utilities (IT/EN)
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # File-based routing
+│   │   ├── blog/
+│   │   └── index.astro
+│   └── styles/         # Global CSS
+├── hugo-cv/            # Hugo CV generator
+└── package.json
 ```
 
-## Development Server
+## 🧞 Commands
 
-Start the development server on `http://localhost:3000`:
+| Command                | Action                                    |
+| :--------------------- | :---------------------------------------- |
+| `npm install`          | Install dependencies                      |
+| `npm run dev`          | Start dev server at `localhost:4321`      |
+| `npm run build`        | Build production site to `./dist/`        |
+| `npm run preview`      | Preview build locally                     |
+| `npm run serve-hugo`   | Serve Hugo CV in development              |
+| `npm run build-hugo-*` | Build Hugo CV to `public/cv/`             |
 
-```bash
-# npm
-npm run dev
+## ✨ Features
 
-# pnpm
-pnpm run dev
+- **Static-First**: Pre-rendered pages for optimal performance
+- **Blog System**: Markdown blog with Content Collections
+- **i18n**: Italian (default) and English (`/en`) support
+- **React Islands**: Interactive components with minimal JavaScript
+- **Syntax Highlighting**: Shiki with github-dark-dimmed theme
+- **Comments**: Giscus integration for blog discussions
+- **Hugo CV**: Separate CV generator maintained alongside blog
 
-# yarn
-yarn dev
+## 🛠️ Tech Stack
 
-# bun
-bun run dev
-```
+- [Astro](https://astro.build) - Static Site Generator
+- [React](https://react.dev) - Islands for interactivity
+- [Tailwind CSS](https://tailwindcss.com) v3 - Styling
+- [MDX](https://mdxjs.com) - Enhanced Markdown
+- [Giscus](https://giscus.app) - GitHub-based comments
+- [Hugo](https://gohugo.io) - CV generation
 
-## Production
+## 📝 Migration Notes
 
-Build the application for production:
+See [MIGRATION.md](./MIGRATION.md) for details about the Nuxt → Astro migration.
 
-```bash
-# npm
-npm run build
+## 🌐 Deployment
 
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-Reference:
-- https://github.com/briancaffey/briancaffey.github.io/tree/master
-- https://github.com/mdrathik/nuxtjs-tailwind-blog/blob/main/nuxt.config.js
+Site deploys to GitHub Pages at: https://petretiandrea.github.io
