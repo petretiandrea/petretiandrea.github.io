@@ -78,7 +78,7 @@ Where:
 - `lastExecutionTime`: The last time the task was executed, helping to track the progress and avoid redundant processing.
 
 ### Optimize queries
-Example of SQL-like query to retrieve messages for next execution time. e.g. current `executionTime > 2024/09/25T12:50:00Z AND executionTime < 2024/09/25T12:50:00Z`
+The most important aspect is query optimization, as these will be performed periodically by the scheduler. The challenge is to efficiently retrieve the next messages to be sent. Example of SQL-like query to retrieve messages for next execution time. e.g. current `executionTime > 2024/09/25T12:50:00Z AND executionTime < 2024/09/25T12:50:00Z`
 
 ```sql
 SELECT * FROM schedules 

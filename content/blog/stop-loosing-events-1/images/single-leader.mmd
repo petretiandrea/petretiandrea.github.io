@@ -1,0 +1,6 @@
+flowchart LR
+    A[Instance A] -->|Try acquire lock| L[Lock Service]
+    B[Instance B] -->|Try acquire lock| L
+    L -->|Lock granted| A
+    L -->|Lock denied| B
+    A --> OutboxRelay

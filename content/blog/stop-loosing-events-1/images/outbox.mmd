@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant S as Service
+    participant DB as Database
+    participant OB as Outbox Table
+    participant R as Relay
+    participant EB as Event Bus
+
+    S->>DB: Update entity (BEGIN TX)
+    S->>OB: Insert Outbox Event
+    DB-->>S: Commit TX (OK)
+    R->>OB: Poll new events
+    R->>EB: Publish event
+    R->>OB: Mark as sent
+    EB-->>Downstream: Consume event
