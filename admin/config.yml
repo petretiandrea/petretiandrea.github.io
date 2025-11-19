@@ -2,13 +2,13 @@ backend:
   name: github
   repo: petretiandrea/petretiandrea.github.io
   branch: master
-  # Use open authoring - allows editing via Pull Requests without OAuth
-  open_authoring: true
+  base_url: https://decap-cms-oauth.petretiandrea.workers.dev
+  auth_endpoint: /auth
 
 # Enable local development with decap-server
 local_backend: true
 
-# Editorial workflow - creates PRs instead of direct commits (works without OAuth)
+# Editorial workflow - creates PRs with draft/in-review/ready columns
 publish_mode: editorial_workflow
 
 media_folder: "public/blog"
