@@ -1,0 +1,9 @@
+name = "decap-cms-oauth"
+main = "oauth-gateway.js"
+compatibility_date = "2024-01-01"
+
+# These will be set via Cloudflare Dashboard
+# Do NOT commit actual values here
+[vars]
+# OAUTH_CLIENT_ID will be set as secret
+# OAUTH_CLIENT_SECRET will be set as secret
