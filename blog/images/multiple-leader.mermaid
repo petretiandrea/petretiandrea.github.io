@@ -1,0 +1,4 @@
+flowchart TD
+    S1[Relay Instance 1] -->|Partitions 0..99| P1[(Hash Ring)]
+    S2[Relay Instance 2] -->|Partitions 100..199| P1
+    S3[Relay Instance 3] -->|Partitions 200..299| P1

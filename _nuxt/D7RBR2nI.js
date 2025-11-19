@@ -1,1 +1,0 @@
-const e=()=>({defaultLocale:"en",availableLocales:["en","it"],locales:["en","it"],detectBrowserLanguage:{useCookie:!0,cookieKey:"i18n_redirected"},fallbackLocale:"it",legacy:!1});export{e as default};
