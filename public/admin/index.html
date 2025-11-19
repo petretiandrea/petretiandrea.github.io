@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Content Manager</title>
+  <style>
+    /* Custom preview styles matching your blog */
+    .blog-preview-container {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+      background: #ffffff;
+      line-height: 1.75;
+    }
+    .blog-preview-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .blog-preview-description {
+      font-size: 1.25rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+    .blog-preview-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .blog-preview-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .blog-preview-tag {
+      font-size: 0.75rem;
+      background: #f3f4f6;
+      color: #374151;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+    .blog-preview-image {
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      border-radius: 0.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
+    .blog-preview-content {
+      font-size: 1.125rem;
+      color: #374151;
+    }
+    .blog-preview-content h1,
+    .blog-preview-content h2,
+    .blog-preview-content h3 {
+      font-weight: 700;
+      color: #111827;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .blog-preview-content h1 { font-size: 2rem; }
+    .blog-preview-content h2 { font-size: 1.5rem; }
+    .blog-preview-content h3 { font-size: 1.25rem; }
+    .blog-preview-content p {
+      margin-bottom: 1.5rem;
+    }
+    .blog-preview-content a {
+      color: #4f46e5;
+      text-decoration: underline;
+    }
+    .blog-preview-content code {
+      background: #f3f4f6;
+      color: #4f46e5;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+    .blog-preview-content pre {
+      background: #1f2937;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    .blog-preview-content pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    .blog-preview-content img {
+      border-radius: 0.5rem;
+      max-width: 100%;
+    }
+    .blog-preview-content blockquote {
+      border-left: 4px solid #4f46e5;
+      padding-left: 1rem;
+      margin-left: 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+    .blog-preview-content ul,
+    .blog-preview-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+    .blog-preview-content li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script>
+    // Register custom preview template using React
+    const BlogPreview = ({ entry, widgetFor }) => {
+      const data = entry.get('data').toJS();
+      const body = widgetFor('body');
+
+      return React.createElement('div', { className: 'blog-preview-container' }, [
+        React.createElement('h1', { className: 'blog-preview-title', key: 'title' },
+          data.title || 'Untitled'
+        ),
+
+        data.description && React.createElement('p', { className: 'blog-preview-description', key: 'desc' },
+          data.description
+        ),
+
+        React.createElement('div', { className: 'blog-preview-meta', key: 'meta' }, [
+          React.createElement('span', { key: 'author' }, data.author || 'Andrea Petreti'),
+          React.createElement('span', { key: 'sep' }, '·'),
+          React.createElement('time', { key: 'date' },
+            data.date ? new Date(data.date).toLocaleDateString('en', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }) : 'No date'
+          )
+        ]),
+
+        data.tags && data.tags.length > 0 && React.createElement('div', { className: 'blog-preview-tags', key: 'tags' },
+          data.tags.map((tag, i) =>
+            React.createElement('span', { className: 'blog-preview-tag', key: i }, tag)
+          )
+        ),
+
+        data.image && React.createElement('img', {
+          className: 'blog-preview-image',
+          src: data.image,
+          alt: data.title,
+          key: 'image'
+        }),
+
+        React.createElement('div', { className: 'blog-preview-content', key: 'content' }, body)
+      ].filter(Boolean));
+    };
+
+    CMS.registerPreviewTemplate('blog', BlogPreview);
+  </script>
+</body>
+</html>

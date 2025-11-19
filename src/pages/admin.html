@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+
+      // Function to process Mermaid diagrams in preview
+      async function processMermaidDiagrams() {
+        // Find all code blocks with language-mermaid class
+        const mermaidBlocks = document.querySelectorAll('pre code.language-mermaid');
+
+        for (const block of mermaidBlocks) {
+          // Skip if already processed
+          if (block.getAttribute('data-mermaid-processed')) continue;
+
+          const code = block.textContent;
+          const pre = block.parentElement;
+
+          try {
+            // Generate unique ID
+            const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+
+            // Render the diagram
+            const { svg } = await mermaid.render(id, code);
+
+            // Replace the pre/code block with the SVG
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid-diagram';
+            wrapper.innerHTML = svg;
+            pre.replaceWith(wrapper);
+          } catch (error) {
+            console.error('Mermaid rendering error:', error);
+            block.setAttribute('data-mermaid-processed', 'error');
+          }
+        }
+      }
+
+      // Watch for changes in the preview pane
+      const observer = new MutationObserver((mutations) => {
+        // Debounce the processing
+        clearTimeout(window.mermaidTimeout);
+        window.mermaidTimeout = setTimeout(processMermaidDiagrams, 300);
+      });
+
+      // Initialize when CMS is ready
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const previewPane = document.querySelector('[class*="PreviewPane"]') || document.body;
+          observer.observe(previewPane, {
+            childList: true,
+            subtree: true
+          });
+
+          // Process any existing diagrams
+          processMermaidDiagrams();
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

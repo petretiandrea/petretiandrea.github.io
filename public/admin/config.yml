@@ -1,0 +1,35 @@
+backend:
+  name: github
+  repo: petretiandrea/petretiandrea.github.io
+  branch: master
+  # Use open authoring - allows editing via Pull Requests without OAuth
+  open_authoring: true
+
+# Enable local development with decap-server
+local_backend: true
+
+# Editorial workflow - creates PRs instead of direct commits (works without OAuth)
+publish_mode: editorial_workflow
+
+media_folder: "public/blog"
+public_folder: "/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: "{{slug}}/images"
+    public_folder: "/blog/{{slug}}/images"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Author", name: "author", widget: "string", default: "Andrea Petreti" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Slug", name: "slug", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

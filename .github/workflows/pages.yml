@@ -1,37 +1,57 @@
-name: Publish on apges
+name: Deploy to GitHub Pages
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup node env
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.11.0'
+          node-version: '20'
+          cache: 'npm'
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.82.0'
-          extended: true
-    
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Gemerate
-        run: npm run generate
+      - name: Build Astro site
+        run: npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          folder: ./.output/public
+          path: ./dist
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

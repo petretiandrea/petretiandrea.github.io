@@ -8,6 +8,7 @@ import mdx from '@astrojs/mdx';
 import icon from 'astro-icon';
 import remarkDirective from 'remark-directive';
 import { remarkCallout } from './src/plugins/remark-callout.mjs';
+import remarkMermaid from 'remark-mermaidjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,10 +32,9 @@ export default defineConfig({
   },
 
   markdown: {
-    remarkPlugins: [remarkDirective, remarkCallout],
+    remarkPlugins: [remarkDirective, remarkCallout, remarkMermaid],
     shikiConfig: {
-      theme: 'github-dark-dimmed',
-      langs: ['json', 'sql', 'js', 'typescript', 'jsx', 'tsx', 'python']
+      theme: 'github-dark-dimmed'
     }
   }
 });
