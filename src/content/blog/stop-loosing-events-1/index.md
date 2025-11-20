@@ -17,7 +17,7 @@ tags:
   - design
   - system architecture
 image: /blog/stop-loosing-events-1/images/thumbnail.webp
-draft: false
+draft: true
 slug: stop-loosing-events-1
 ---
 In modern microservices architectures, ensuring that database updates and events sent to other services stay in sync can be surprisingly tricky.
