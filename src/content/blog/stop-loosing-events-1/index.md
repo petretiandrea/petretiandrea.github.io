@@ -9,7 +9,7 @@ description: In modern microservices, ensuring consistency between database
   design robust, scalable event pipelines that maintain consistency across
   services, even in the face of crashes, retries, or multiple relay replicas.
 author: Andrea Petreti
-date: 2024-12-13
+date: 2025-11-20
 tags:
   - shard
   - partitions
