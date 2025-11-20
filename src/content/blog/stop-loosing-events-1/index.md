@@ -16,7 +16,7 @@ tags:
   - scheduler
   - design
   - system architecture
-image: /blog/stop-loosing-events-1/images/thumbnail.webp
+image: ""
 draft: true
 slug: stop-loosing-events-1
 ---
