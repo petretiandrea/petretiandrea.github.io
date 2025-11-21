@@ -93,8 +93,8 @@ Now, we need a way to send the events stored in the database to the event bus (o
       A[Client] --> B[Load Balancer]
       B --> C[Server 1]
       B --> D[Server 2]
-  ```
-<img src="images/outobx.svg" alt="outbox" class="center-md-image" width="700"/>
+```
+
 
 ## Polling Processor
 
