@@ -163,14 +163,6 @@ A more advanced approach is to use Change Data Capture (CDC) to monitor the outb
       B --> D[Server 2]
 ```
 
-<mermaid>
-graph TD
-    A\[Process Order] --> B\[Database Commit]
-    B --> C\[Store Event in Outbox]
-    C --> D\[CDC Connector]
-    D --> E\[Event Bus]
-    E --> F\[Downstream Services]
-</mermaid>
 The key benefits of CDC are:
  - Low latency: events are sent as soon as they are inserted into the outbox
  - Built-in ordering: CDC ensures that events are processed in the order they were inserted into the outbox
