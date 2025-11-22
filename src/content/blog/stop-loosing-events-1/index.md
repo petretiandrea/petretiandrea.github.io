@@ -16,7 +16,7 @@ tags:
   - scheduler
   - design
   - system architecture
-image: ""
+image: /blog/stop-losing-events-how-the-outbox-pattern-guarantees-consistency-in-distributed-systems/images/aaa.webp
 draft: true
 slug: stop-loosing-events-1
 ---
