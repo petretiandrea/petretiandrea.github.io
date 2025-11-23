@@ -86,15 +86,21 @@ fun processOrder(orderId: String) {
 
 Now, we need a way to send the events stored in the database to the event bus (or any other external system). A separate component must read the outbox table and send the events. The implementation of this component is not trivial, as it must handle retries, failures, and ensure that events are sent in the correct order.
 
-// TODO: add mermmaid diagram of the outbox pattern
-
 ```mermaid
-  graph TD
-      A[Client] --> B[Load Balancer]
-      B --> C[Server 1]
-      B --> D[Server 2]
+sequenceDiagram
+participant S as Service
+participant DB as Database
+participant OB as Outbox Table
+participant R as Relay
+participant EB as Event Bus
+S->>DB: Update entity (BEGIN TX)
+S->>OB: Insert Outbox Event
+DB-->>S: Commit TX (OK)
+R->>OB: Poll new events
+R->>EB: Publish event
+R->>OB: Mark as sent
+EB-->>Downstream: Consume event
 ```
-
 
 ## Polling Processor
 
@@ -157,15 +163,16 @@ Even with this improvements, we have still some limitations:
 A more advanced approach is to use Change Data Capture (CDC) to monitor the outbox table for new events. This way, we can send events as soon as they are inserted into the outbox, reducing latency and improving scalability. Basically CDC is a sort of connector that reads the database transaction log and emits events for changes in the outbox table. So in order to use it, the database must support CDC (like PostgreSQL with logical replication or MySQL with binlog, or MongoDB with change streams).
 
 ```mermaid
-  graph TD
-      A[Client] --> B[Load Balancer]
-      B --> C[Server 1]
-      B --> D[Server 2]
+graph TD
+A[Client] --> B[Load Balancer]
+B --> C[Server 1]
+B --> D[Server 2]
 ```
 
 The key benefits of CDC are:
- - Low latency: events are sent as soon as they are inserted into the outbox
- - Built-in ordering: CDC ensures that events are processed in the order they were inserted into the outbox
+
+* Low latency: events are sent as soon as they are inserted into the outbox
+* Built-in ordering: CDC ensures that events are processed in the order they were inserted into the outbox
 
 What about scalability and distributed support? Depends on implementations details, for example you can spin up a fixed multiple connector instances, each one handling a subset of the outbox events (e.g., based on event type or partitioning key). This way, you can scale horizontally and handle high event volumes without bottlenecks. But you must consider that each instance must track its own progress (e.g., using offsets or timestamps) to avoid duplicates and ensure ordering. 
 
