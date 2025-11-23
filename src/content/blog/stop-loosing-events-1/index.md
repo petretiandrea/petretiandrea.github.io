@@ -84,7 +84,11 @@ fun processOrder(orderId: String) {
 }
 ```
 
-Now, we need a way to send the events stored in the database to the event bus (or any other external system). A separate component must read the outbox table and send the events. The implementation of this component is not trivial, as it must handle retries, failures, and ensure that events are sent in the correct order.
+Now, we need a 
+
+## Polling Processor
+
+The simpliest way to implement the outbox relay is with a polling processor. This is a background job that periodically checks the outbox table for new events and sends them to the external system.
 
 ```mermaid
 sequenceDiagram
@@ -102,15 +106,13 @@ R->>OB: Mark as sent
 EB-->>Downstream: Consume event
 ```
 
-## Polling Processor
-
-The simpliest way to implement the outbox relay is with a polling processor. This is a background job that periodically checks the outbox table for new events and sends them to the external system.
+A code snipped could be
 
 ```kotlin
 Scheduler.scheduleAtFixedRate(::outboxRelay, initialDelay=0, period=5000)
 
 fun outboxRelay() {
-    val events = outboxRepository.findUnsentEvents(pageSize=100)
+    val events = outboxRepository.findUnusedEvents()
     for (event in events) {
         try {
             eventBus.publish(event)
@@ -163,10 +165,11 @@ Even with this improvements, we have still some limitations:
 A more advanced approach is to use Change Data Capture (CDC) to monitor the outbox table for new events. This way, we can send events as soon as they are inserted into the outbox, reducing latency and improving scalability. Basically CDC is a sort of connector that reads the database transaction log and emits events for changes in the outbox table. So in order to use it, the database must support CDC (like PostgreSQL with logical replication or MySQL with binlog, or MongoDB with change streams).
 
 ```mermaid
-graph TD
-A[Client] --> B[Load Balancer]
-B --> C[Server 1]
-B --> D[Server 2]
+flowchart LR
+A[Service] -->|Insert Event<br/>in Outbox Table| DB[(Database)]
+DB -->|Transaction Log| CDC[CDC Connector]
+CDC -->|Emit Change Event| EB[(Event Bus or Broker)]
+EB --> D[Downstream Consumers]
 ```
 
 The key benefits of CDC are:
@@ -186,7 +189,23 @@ This approach introduce a coupling between the database and message broker, and 
 
 ## Event First, DB Later
 
-This solutions is not very common, but is what DAPR implements under the hood. The idea is to publish the event first into an internal reliable queue with a unique event id and the update the event id and entity on database with same transaction. 
+This solutions is not very common, but is what DAPR implements under the hood. The idea is to publish the event first into an internal reliable queue with a unique event id and the update the event id and entity on database with same transaction. The following diagram shows the entire flow.
+
+```mermaid
+sequenceDiagram
+participant S as Service
+participant Q as Internal Reliable Queue
+participant DB as Database
+participant C as Outbox Consumer
+participant EB as Event Bus
+S->>Q: Enqueue event (with eventId)
+S->>DB: Update entity + store eventId<br/>(transaction)
+C->>Q: Read event
+C->>DB: Check eventId exists?
+DB-->>C: Yes → valid event
+C->>EB: Publish external event
+DB-->>C: No → retry until timeout
+```
 
 A consumer of the internal reliable queue reads the events and for each one of them:
 
